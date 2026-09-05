@@ -1,0 +1,1 @@
+COMMENT ON FUNCTION private.handle_new_auth_user() IS 'Synchronizes auth.users identity and email into public.profiles';

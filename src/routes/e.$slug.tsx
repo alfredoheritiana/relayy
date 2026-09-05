@@ -60,10 +60,7 @@ function PublicExperiencePage() {
       </header>
 
       <main className="mx-auto max-w-3xl px-5 py-10 sm:py-14">
-        <VisitorFlow
-          slug={slug}
-          {...(isDemo ? { demoHint: demoConfig.referenceSentence } : {})}
-        />
+        <VisitorFlow slug={slug} {...(isDemo ? { demoHint: demoConfig.referenceSentence } : {})} />
       </main>
     </div>
   );

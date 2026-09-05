@@ -16,12 +16,7 @@ import {
   progressLabel,
 } from "@/domain/engine";
 import { buildIntent, deterministicSummary, qualify } from "@/domain/scoring";
-import type {
-  ExperienceDefinition,
-  NextStep,
-  PhaseProgress,
-  SessionValue,
-} from "@/domain/types";
+import type { ExperienceDefinition, NextStep, PhaseProgress, SessionValue } from "@/domain/types";
 
 const startSchema = z.object({ slug: z.string().min(1).max(80) });
 const answerSchema = z.object({
@@ -120,12 +115,8 @@ async function buildState(
 export const startVisitorSession = createServerFn({ method: "POST" })
   .inputValidator((data: unknown) => startSchema.parse(data))
   .handler(async ({ data }): Promise<VisitorState | null> => {
-    const {
-      loadPublishedExperience,
-      hashToken,
-      newToken,
-      logEvent,
-    } = await import("./session.server");
+    const { loadPublishedExperience, hashToken, newToken, logEvent } =
+      await import("./session.server");
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
 
     const experience = await loadPublishedExperience(data.slug);
@@ -196,8 +187,9 @@ export const submitVisitorAnswer = createServerFn({ method: "POST" })
     if (!versionRow) return null;
 
     const definition = versionRow.definition as unknown as ExperienceDefinition;
-    const organization = (versionRow.experiences as { organizations?: { name: string; is_demo: boolean } } | null)
-      ?.organizations;
+    const organization = (
+      versionRow.experiences as { organizations?: { name: string; is_demo: boolean } } | null
+    )?.organizations;
 
     const question = definition.questions.find((candidate) => candidate.key === data.questionKey);
     if (!question) return null;
@@ -309,9 +301,8 @@ export interface VisitorCompletion {
 export const confirmVisitorSubmission = createServerFn({ method: "POST" })
   .inputValidator((data: unknown) => confirmSchema.parse(data))
   .handler(async ({ data }): Promise<VisitorCompletion | { error: string }> => {
-    const { authorizeSession, loadSessionValues, persistValues, logEvent } = await import(
-      "./session.server"
-    );
+    const { authorizeSession, loadSessionValues, persistValues, logEvent } =
+      await import("./session.server");
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
 
     if (!data.consent) return { error: "consent_required" };

@@ -19,22 +19,40 @@ const SERVICE_PATTERNS: ReadonlyArray<{ value: string; patterns: readonly string
     value: "Relevé topographique",
     patterns: ["releve topographique", "topographie", "topographique", "plan de terrain"],
   },
-  { value: "Division", patterns: ["division", "diviser", "lotir", "lotissement", "parcelle a diviser"] },
+  {
+    value: "Division",
+    patterns: ["division", "diviser", "lotir", "lotissement", "parcelle a diviser"],
+  },
   { value: "Implantation", patterns: ["implantation", "implanter", "tracer la construction"] },
   { value: "Expertise", patterns: ["expertise", "expert", "litige", "conflit de voisinage"] },
 ];
 
 const TIMELINE_PATTERNS: ReadonlyArray<{ value: string; patterns: readonly string[] }> = [
-  { value: "Dès que possible", patterns: ["des que possible", "au plus vite", "urgent", "cette semaine"] },
+  {
+    value: "Dès que possible",
+    patterns: ["des que possible", "au plus vite", "urgent", "cette semaine"],
+  },
   { value: "Ce mois-ci", patterns: ["ce mois-ci", "dans les prochains jours", "sous quinzaine"] },
   { value: "Le mois prochain", patterns: ["le mois prochain", "mois prochain", "dans un mois"] },
-  { value: "Dans 2 à 3 mois", patterns: ["dans deux mois", "dans 2 mois", "dans trois mois", "dans 3 mois", "ce trimestre"] },
-  { value: "Plus tard / à définir", patterns: ["plus tard", "pas presse", "a definir", "l'annee prochaine", "annee prochaine"] },
+  {
+    value: "Dans 2 à 3 mois",
+    patterns: ["dans deux mois", "dans 2 mois", "dans trois mois", "dans 3 mois", "ce trimestre"],
+  },
+  {
+    value: "Plus tard / à définir",
+    patterns: ["plus tard", "pas presse", "a definir", "l'annee prochaine", "annee prochaine"],
+  },
 ];
 
 const REASON_PATTERNS: ReadonlyArray<{ value: string; patterns: readonly string[] }> = [
-  { value: "Pose d’une clôture", patterns: ["cloture", "clôture", "poser une cloture", "grillage"] },
-  { value: "Projet de construction", patterns: ["construire", "construction", "batir", "extension", "maison"] },
+  {
+    value: "Pose d’une clôture",
+    patterns: ["cloture", "clôture", "poser une cloture", "grillage"],
+  },
+  {
+    value: "Projet de construction",
+    patterns: ["construire", "construction", "batir", "extension", "maison"],
+  },
   { value: "Vente du bien", patterns: ["vendre", "vente", "mise en vente"] },
   { value: "Achat du bien", patterns: ["acheter", "achat", "acquisition"] },
   { value: "Litige de voisinage", patterns: ["voisin", "litige", "desaccord"] },
@@ -102,7 +120,9 @@ export function extractDeterministic(
     const streetMatch = ADDRESS_REGEX.exec(text);
     const raw = streetMatch?.[1]?.trim();
     if (raw) {
-      const inline = /^(.+?)\s+(?:à|a)\s+(\p{Lu}[\p{L}'-]{2,}(?:\s+\p{Lu}[\p{L}'-]{2,})?)$/u.exec(raw);
+      const inline = /^(.+?)\s+(?:à|a)\s+(\p{Lu}[\p{L}'-]{2,}(?:\s+\p{Lu}[\p{L}'-]{2,})?)$/u.exec(
+        raw,
+      );
       let value = raw;
       if (inline?.[1] && inline[2]) {
         value = `${inline[1].trim()}, ${inline[2].trim()}`;
@@ -119,7 +139,6 @@ export function extractDeterministic(
       });
     }
   }
-
 
   return {
     extractions,

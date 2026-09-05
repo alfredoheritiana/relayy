@@ -1,0 +1,1 @@
+DROP FUNCTION IF EXISTS public.create_organization_with_owner(text, text, text);

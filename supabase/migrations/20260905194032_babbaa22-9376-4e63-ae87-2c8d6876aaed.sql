@@ -1,0 +1,1 @@
+GRANT EXECUTE ON FUNCTION private.current_user_has_membership() TO authenticated;

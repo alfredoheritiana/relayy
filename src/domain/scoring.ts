@@ -25,10 +25,7 @@ function normalize(text: string): string {
     .replace(/[\u0300-\u036f]/g, "");
 }
 
-function scoreFit(
-  rules: QualificationRules,
-  accepted: Map<string, SessionValue>,
-): DimensionScore {
+function scoreFit(rules: QualificationRules, accepted: Map<string, SessionValue>): DimensionScore {
   const reasons: ScoreReason[] = [];
   const service = textOf(accepted.get("service"));
   const location = textOf(accepted.get("location"));
@@ -160,9 +157,7 @@ function scoreUrgency(
       ],
     };
   }
-  const near = rules.urgentTimelines.some((item) =>
-    normalize(timeline).includes(normalize(item)),
-  );
+  const near = rules.urgentTimelines.some((item) => normalize(timeline).includes(normalize(item)));
   return {
     dimension: "urgency",
     score: near ? 85 : 45,

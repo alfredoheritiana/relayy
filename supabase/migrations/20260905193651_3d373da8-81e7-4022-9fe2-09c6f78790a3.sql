@@ -1,0 +1,1 @@
+GRANT EXECUTE ON FUNCTION private.handle_new_auth_user() TO postgres;

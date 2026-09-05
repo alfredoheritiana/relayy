@@ -36,7 +36,6 @@ const deaccent = (value: string): string =>
     .map((char) => char.normalize("NFD").replace(/[\u0300-\u036f]/g, "") || char)
     .join("");
 
-
 /** Découpe la phrase en segments, en soulignant les fragments compris. */
 function highlight(sentence: string, facts: readonly Fact[]) {
   const marks: Array<{ start: number; end: number; key: string }> = [];
@@ -109,7 +108,9 @@ export function LiveRelayTrace({ tone = "dark", className }: LiveRelayTraceProps
         <span
           className={cn(
             "relay-label rounded-full border px-2.5 py-1",
-            dark ? "border-relay-line-dark text-relay-muted-dark" : "border-border text-muted-foreground",
+            dark
+              ? "border-relay-line-dark text-relay-muted-dark"
+              : "border-border text-muted-foreground",
           )}
         >
           Démonstration locale
@@ -136,7 +137,11 @@ export function LiveRelayTrace({ tone = "dark", className }: LiveRelayTraceProps
           )}
         />
         <div className="mt-3 flex flex-wrap items-center gap-3">
-          <Button type="button" onClick={() => setAnalyzedText(text.trim())} disabled={!text.trim()}>
+          <Button
+            type="button"
+            onClick={() => setAnalyzedText(text.trim())}
+            disabled={!text.trim()}
+          >
             Analyser la phrase
           </Button>
           {analyzed ? (
@@ -148,7 +153,9 @@ export function LiveRelayTrace({ tone = "dark", className }: LiveRelayTraceProps
               }}
               className={cn(
                 "min-h-11 text-sm underline underline-offset-4",
-                dark ? "text-relay-muted-dark hover:text-relay-white" : "text-muted-foreground hover:text-foreground",
+                dark
+                  ? "text-relay-muted-dark hover:text-relay-white"
+                  : "text-muted-foreground hover:text-foreground",
               )}
             >
               Réinitialiser la phrase
@@ -202,8 +209,8 @@ export function LiveRelayTrace({ tone = "dark", className }: LiveRelayTraceProps
             </ul>
           ) : (
             <p className={cn("text-sm", dark ? "text-relay-muted-dark" : "text-muted-foreground")}>
-              Je dois clarifier le besoin : cette phrase ne contient pas encore de fait
-              exploitable pour ce parcours.
+              Je dois clarifier le besoin : cette phrase ne contient pas encore de fait exploitable
+              pour ce parcours.
             </p>
           )}
 
@@ -215,7 +222,12 @@ export function LiveRelayTrace({ tone = "dark", className }: LiveRelayTraceProps
               facts.length > 0 ? "border-relay-red" : "border-relay-orange",
             )}
           >
-            <span className={cn("relay-label", dark ? "text-relay-muted-dark" : "text-muted-foreground")}>
+            <span
+              className={cn(
+                "relay-label",
+                dark ? "text-relay-muted-dark" : "text-muted-foreground",
+              )}
+            >
               {facts.length > 0 ? "Action — demander l’e-mail" : "Manque — préciser le besoin"}
             </span>
             <span className="font-display text-base font-semibold">
@@ -225,8 +237,14 @@ export function LiveRelayTrace({ tone = "dark", className }: LiveRelayTraceProps
             </span>
           </div>
 
-          <p className={cn("font-mono text-xs", dark ? "text-relay-muted-dark" : "text-muted-foreground")}>
-            {facts.length} fait{facts.length > 1 ? "s" : ""} compris · 0 question répétée · 1 prochaine action
+          <p
+            className={cn(
+              "font-mono text-xs",
+              dark ? "text-relay-muted-dark" : "text-muted-foreground",
+            )}
+          >
+            {facts.length} fait{facts.length > 1 ? "s" : ""} compris · 0 question répétée · 1
+            prochaine action
           </p>
         </div>
       ) : (

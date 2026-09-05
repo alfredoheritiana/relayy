@@ -534,6 +534,13 @@ export type Database = {
             referencedRelation: "organizations"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "organization_members_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
         ]
       }
       organizations: {
@@ -582,18 +589,21 @@ export type Database = {
         Row: {
           created_at: string
           display_name: string | null
+          email: string
           id: string
           updated_at: string
         }
         Insert: {
           created_at?: string
           display_name?: string | null
+          email: string
           id: string
           updated_at?: string
         }
         Update: {
           created_at?: string
           display_name?: string | null
+          email?: string
           id?: string
           updated_at?: string
         }
@@ -746,7 +756,18 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      create_workspace: {
+        Args: {
+          p_description?: string
+          p_industries?: string[]
+          p_name: string
+          p_service_areas?: string[]
+          p_services?: string[]
+          p_slug: string
+          p_website_url?: string
+        }
+        Returns: string
+      }
     }
     Enums: {
       [_ in never]: never

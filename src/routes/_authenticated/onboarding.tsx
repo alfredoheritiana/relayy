@@ -93,10 +93,7 @@ function OnboardingPage() {
     >
       <div className="grid gap-8 lg:grid-cols-12">
         <div className="lg:col-span-4">
-          <SignalPath
-            orientation="vertical"
-            nodes={nodesFromIndex([...stepLabels], stepIndex)}
-          />
+          <SignalPath orientation="vertical" nodes={nodesFromIndex([...stepLabels], stepIndex)} />
         </div>
 
         <form

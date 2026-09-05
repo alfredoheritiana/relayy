@@ -1,0 +1,1 @@
+COMMENT ON COLUMN public.organization_members.role IS 'Organization role: owner or member';

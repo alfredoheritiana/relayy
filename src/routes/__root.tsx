@@ -78,10 +78,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Relay — intake adaptatif" },
-      { name: "description", content: "Relay transforme une phrase en demande structurée pour les entreprises de services." },
+      {
+        name: "description",
+        content:
+          "Relay transforme une phrase en demande structurée pour les entreprises de services.",
+      },
       { name: "author", content: "Lovable" },
       { property: "og:title", content: "Relay — intake adaptatif" },
-      { property: "og:description", content: "Une question utile à la fois, une demande exploitable à l’arrivée." },
+      {
+        property: "og:description",
+        content: "Une question utile à la fois, une demande exploitable à l’arrivée.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@Lovable" },
@@ -98,7 +105,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap",
       },
-
     ],
   }),
   shellComponent: RootShell,

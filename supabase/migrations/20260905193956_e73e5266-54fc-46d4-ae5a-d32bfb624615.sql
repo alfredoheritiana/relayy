@@ -1,0 +1,1 @@
+COMMENT ON TABLE public.organization_members IS 'Tenant memberships; stage 1 enforces one organization per user';

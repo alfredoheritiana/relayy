@@ -1,4 +1,5 @@
 import { Link, useNavigate } from "@tanstack/react-router";
+import { useQueryClient } from "@tanstack/react-query";
 import { useState, type ReactNode } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -42,11 +43,14 @@ export function AppShell({
   children,
 }: AppShellProps) {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const [menuOpen, setMenuOpen] = useState(false);
 
   const signOut = async () => {
+    await queryClient.cancelQueries();
+    queryClient.clear();
     await supabase.auth.signOut();
-    navigate({ to: "/auth" });
+    navigate({ to: "/auth", replace: true });
   };
 
   const sidebarBody = (
@@ -58,7 +62,9 @@ export function AppShell({
       <p className="mt-6 font-mono text-[10px] uppercase tracking-[0.14em] text-background/45">
         Organisation
       </p>
-      <p className="mt-1 truncate text-sm text-background">{organizationName ?? "Non configurée"}</p>
+      <p className="mt-1 truncate text-sm text-background">
+        {organizationName ?? "Non configurée"}
+      </p>
 
       <div className="mt-8">
         <NavLinks onNavigate={() => setMenuOpen(false)} />

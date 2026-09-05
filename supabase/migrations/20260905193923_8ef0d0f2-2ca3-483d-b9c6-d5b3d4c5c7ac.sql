@@ -1,0 +1,1 @@
+COMMENT ON INDEX public.organization_members_one_org_per_user_idx IS 'Relay stage 1: one organization membership per authenticated user';

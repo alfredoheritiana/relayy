@@ -1,0 +1,1 @@
+GRANT EXECUTE ON FUNCTION public.create_workspace(text, text, text, text, text[], text[], text[]) TO service_role;

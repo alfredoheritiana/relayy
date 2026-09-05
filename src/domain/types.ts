@@ -96,10 +96,7 @@ export interface DimensionScore {
 }
 
 export type RecommendedAction =
-  | "high_priority_contact"
-  | "standard_follow_up"
-  | "request_missing_information"
-  | "not_a_fit";
+  "high_priority_contact" | "standard_follow_up" | "request_missing_information" | "not_a_fit";
 
 export interface Disqualifier {
   readonly id: string;

@@ -1,0 +1,1 @@
+COMMENT ON FUNCTION public.create_workspace(text, text, text, text, text[], text[], text[]) IS 'Atomically creates the authenticated user workspace and owner membership under RLS';

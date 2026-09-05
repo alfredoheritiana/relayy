@@ -1,0 +1,1 @@
+REVOKE ALL ON FUNCTION private.is_org_member(uuid) FROM PUBLIC;
