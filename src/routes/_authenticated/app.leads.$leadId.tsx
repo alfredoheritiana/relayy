@@ -164,7 +164,7 @@ function LeadDetailPage() {
                 <Button
                   size="sm"
                   variant="outline"
-                  onClick={() => copy("synthese", data.lead.summary)}
+                  onClick={() => copy("synthese", data.lead.summary ?? data.lead.intent)}
                 >
                   Copier la synthèse
                 </Button>
@@ -276,32 +276,8 @@ function LeadDetailPage() {
                         {score.score === null ? "Données insuffisantes" : `${score.score}/100`}
                       </p>
                       <ul className="mt-1 space-y-1 text-xs text-muted-foreground">
-                        {score.reasons.map((reason) => (
-                          <li key={reason.ruleId}>
-                            <span
-                              aria-hidden="true"
-                              className={
-                                reason.contribution === "positive"
-                                  ? "text-foreground"
-                                  : reason.contribution === "negative"
-                                    ? "text-destructive"
-                                    : ""
-                              }
-                            >
-                              {reason.contribution === "positive"
-                                ? "+"
-                                : reason.contribution === "negative"
-                                  ? "−"
-                                  : "·"}{" "}
-                            </span>
-                            {reason.reason}
-                            {reason.sourceField ? (
-                              <span className="text-muted-foreground/70">
-                                {" "}
-                                ({FIELD_LABELS[reason.sourceField] ?? reason.sourceField})
-                              </span>
-                            ) : null}
-                          </li>
+                        {score.reasons.map((reason, index) => (
+                          <li key={`${score.dimension}-${index}`}>{reason}</li>
                         ))}
                       </ul>
                     </li>
