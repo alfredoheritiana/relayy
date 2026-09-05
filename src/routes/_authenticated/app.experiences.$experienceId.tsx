@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
+import { toast } from "sonner";
 
 import { AppShell } from "@/components/relay/app-shell";
 import { ExperienceEditor } from "@/components/relay/experience-editor";
@@ -44,16 +45,24 @@ function ExperienceEditorPage() {
   const saveMutation = useMutation({
     mutationFn: (settings: ExperienceSettings) => save({ data: { experienceId, settings } }),
     onSuccess: () => {
+      toast.success("Brouillon enregistré.");
       queryClient.invalidateQueries({ queryKey: ["experience", experienceId] });
       queryClient.invalidateQueries({ queryKey: ["experiences"] });
+    },
+    onError: (error: unknown) => {
+      toast.error(error instanceof Error ? error.message : "Enregistrement impossible.");
     },
   });
 
   const publishMutation = useMutation({
     mutationFn: () => publish({ data: { experienceId } }),
-    onSuccess: () => {
+    onSuccess: (result) => {
+      toast.success(`Version ${result.versionNumber} publiée.`);
       queryClient.invalidateQueries({ queryKey: ["experience", experienceId] });
       queryClient.invalidateQueries({ queryKey: ["experiences"] });
+    },
+    onError: (error: unknown) => {
+      toast.error(error instanceof Error ? error.message : "Publication impossible.");
     },
   });
 
