@@ -1,0 +1,1 @@
+GRANT EXECUTE ON FUNCTION private.org_has_members(uuid) TO authenticated;
