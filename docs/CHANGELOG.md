@@ -57,3 +57,18 @@ interprétation IA côté serveur avec repli et création de lead idempotente so
 ### À confirmer
 
 Voir `docs/FACTS_TO_CONFIRM.md`.
+
+## Éditeur guidé, Knowledge et Analytics
+
+- Éditeur guidé d’expériences : création (`/app/experiences/new`) et édition
+  (`/app/experiences/:id`) en cinq étapes, avec aperçu en direct des questions générées.
+- Génération déterministe de la définition et des règles de qualification à partir des
+  réglages (services, zones, échéances, coordonnées demandées) — `src/domain/definitions/builder.ts`.
+- Versionnage réel : chaque enregistrement met à jour le brouillon, la publication crée la
+  version servie aux visiteurs sans modifier les demandes déjà reçues.
+- Refonte des écrans Knowledge (couverture, profil, services, sources) et Analytics
+  (métriques expliquées, barres de répartition, états vides et erreurs).
+- Pages juridiques : identité légale centralisée dans `src/config/product.ts` et
+  avertissement automatique tant qu’elle est incomplète.
+- Vérifications : typecheck, 21 tests, création puis publication d’un parcours en navigateur
+  (données de test supprimées).

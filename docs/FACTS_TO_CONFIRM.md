@@ -25,3 +25,18 @@ Ces contenus sont des espaces réservés rédigés par défaut : ils doivent êt
 - Zones desservies et services affichés dans la démonstration GeoLia (actuellement fictifs).
 - Les demandes visibles dans le tableau de bord de démonstration sont des exemples locaux :
   elles n’existent pas en base et ne doivent pas être présentées comme des clients réels.
+
+## Validation juridique — où saisir les informations
+
+Les pages « Confidentialité » et « Conditions » affichent automatiquement un avertissement
+tant que l’identité légale n’est pas renseignée dans `src/config/product.ts` (`legalEntity`) :
+
+- `companyName` — raison sociale exacte
+- `registrationNumber` — numéro d’entreprise
+- `address` — adresse du siège
+- `contactEmail` — adresse e-mail pour les demandes relatives aux données
+- `dataController` — responsable du traitement
+- `retentionMonths` — durée de conservation des demandes et sessions
+
+Dès que ces six valeurs sont fournies, l’avertissement disparaît et le bloc d’identité
+légale est affiché sur les deux pages. Le texte final reste à faire relire par un conseil.

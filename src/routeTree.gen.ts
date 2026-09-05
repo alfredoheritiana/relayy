@@ -19,10 +19,12 @@ import { Route as ESlugRouteImport } from './routes/e.$slug'
 import { Route as LegalConditionsRouteImport } from './routes/legal.conditions'
 import { Route as LegalConfidentialiteRouteImport } from './routes/legal.confidentialite'
 import { Route as AuthenticatedAppAnalyticsRouteImport } from './routes/_authenticated/app.analytics'
-import { Route as AuthenticatedAppExperiencesRouteImport } from './routes/_authenticated/app.experiences'
 import { Route as AuthenticatedAppInboxRouteImport } from './routes/_authenticated/app.inbox'
 import { Route as AuthenticatedAppKnowledgeRouteImport } from './routes/_authenticated/app.knowledge'
 import { Route as AuthenticatedAppSettingsRouteImport } from './routes/_authenticated/app.settings'
+import { Route as AuthenticatedAppExperiencesIndexRouteImport } from './routes/_authenticated/app.experiences.index'
+import { Route as AuthenticatedAppExperiencesExperienceIdRouteImport } from './routes/_authenticated/app.experiences.$experienceId'
+import { Route as AuthenticatedAppExperiencesNewRouteImport } from './routes/_authenticated/app.experiences.new'
 import { Route as AuthenticatedAppLeadsLeadIdRouteImport } from './routes/_authenticated/app.leads.$leadId'
 
 const IndexRoute = IndexRouteImport.update({
@@ -75,12 +77,6 @@ const AuthenticatedAppAnalyticsRoute =
     path: '/app/analytics',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-const AuthenticatedAppExperiencesRoute =
-  AuthenticatedAppExperiencesRouteImport.update({
-    id: '/app/experiences',
-    path: '/app/experiences',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
 const AuthenticatedAppInboxRoute = AuthenticatedAppInboxRouteImport.update({
   id: '/app/inbox',
   path: '/app/inbox',
@@ -96,6 +92,24 @@ const AuthenticatedAppSettingsRoute =
   AuthenticatedAppSettingsRouteImport.update({
     id: '/app/settings',
     path: '/app/settings',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAppExperiencesIndexRoute =
+  AuthenticatedAppExperiencesIndexRouteImport.update({
+    id: '/app/experiences/',
+    path: '/app/experiences/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAppExperiencesExperienceIdRoute =
+  AuthenticatedAppExperiencesExperienceIdRouteImport.update({
+    id: '/app/experiences/$experienceId',
+    path: '/app/experiences/$experienceId',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAppExperiencesNewRoute =
+  AuthenticatedAppExperiencesNewRouteImport.update({
+    id: '/app/experiences/new',
+    path: '/app/experiences/new',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedAppLeadsLeadIdRoute =
@@ -115,11 +129,13 @@ export interface FileRoutesByFullPath {
   '/legal/confidentialite': typeof LegalConfidentialiteRoute
   '/app/': typeof AppIndexRoute
   '/app/analytics': typeof AuthenticatedAppAnalyticsRoute
-  '/app/experiences': typeof AuthenticatedAppExperiencesRoute
   '/app/inbox': typeof AuthenticatedAppInboxRoute
   '/app/knowledge': typeof AuthenticatedAppKnowledgeRoute
   '/app/settings': typeof AuthenticatedAppSettingsRoute
+  '/app/experiences/$experienceId': typeof AuthenticatedAppExperiencesExperienceIdRoute
+  '/app/experiences/new': typeof AuthenticatedAppExperiencesNewRoute
   '/app/leads/$leadId': typeof AuthenticatedAppLeadsLeadIdRoute
+  '/app/experiences/': typeof AuthenticatedAppExperiencesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -131,11 +147,13 @@ export interface FileRoutesByTo {
   '/legal/confidentialite': typeof LegalConfidentialiteRoute
   '/app': typeof AppIndexRoute
   '/app/analytics': typeof AuthenticatedAppAnalyticsRoute
-  '/app/experiences': typeof AuthenticatedAppExperiencesRoute
   '/app/inbox': typeof AuthenticatedAppInboxRoute
   '/app/knowledge': typeof AuthenticatedAppKnowledgeRoute
   '/app/settings': typeof AuthenticatedAppSettingsRoute
+  '/app/experiences/$experienceId': typeof AuthenticatedAppExperiencesExperienceIdRoute
+  '/app/experiences/new': typeof AuthenticatedAppExperiencesNewRoute
   '/app/leads/$leadId': typeof AuthenticatedAppLeadsLeadIdRoute
+  '/app/experiences': typeof AuthenticatedAppExperiencesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -149,11 +167,13 @@ export interface FileRoutesById {
   '/legal/confidentialite': typeof LegalConfidentialiteRoute
   '/app/': typeof AppIndexRoute
   '/_authenticated/app/analytics': typeof AuthenticatedAppAnalyticsRoute
-  '/_authenticated/app/experiences': typeof AuthenticatedAppExperiencesRoute
   '/_authenticated/app/inbox': typeof AuthenticatedAppInboxRoute
   '/_authenticated/app/knowledge': typeof AuthenticatedAppKnowledgeRoute
   '/_authenticated/app/settings': typeof AuthenticatedAppSettingsRoute
+  '/_authenticated/app/experiences/$experienceId': typeof AuthenticatedAppExperiencesExperienceIdRoute
+  '/_authenticated/app/experiences/new': typeof AuthenticatedAppExperiencesNewRoute
   '/_authenticated/app/leads/$leadId': typeof AuthenticatedAppLeadsLeadIdRoute
+  '/_authenticated/app/experiences/': typeof AuthenticatedAppExperiencesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -167,11 +187,13 @@ export interface FileRouteTypes {
     | '/legal/confidentialite'
     | '/app/'
     | '/app/analytics'
-    | '/app/experiences'
     | '/app/inbox'
     | '/app/knowledge'
     | '/app/settings'
+    | '/app/experiences/$experienceId'
+    | '/app/experiences/new'
     | '/app/leads/$leadId'
+    | '/app/experiences/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -183,11 +205,13 @@ export interface FileRouteTypes {
     | '/legal/confidentialite'
     | '/app'
     | '/app/analytics'
-    | '/app/experiences'
     | '/app/inbox'
     | '/app/knowledge'
     | '/app/settings'
+    | '/app/experiences/$experienceId'
+    | '/app/experiences/new'
     | '/app/leads/$leadId'
+    | '/app/experiences'
   id:
     | '__root__'
     | '/'
@@ -200,11 +224,13 @@ export interface FileRouteTypes {
     | '/legal/confidentialite'
     | '/app/'
     | '/_authenticated/app/analytics'
-    | '/_authenticated/app/experiences'
     | '/_authenticated/app/inbox'
     | '/_authenticated/app/knowledge'
     | '/_authenticated/app/settings'
+    | '/_authenticated/app/experiences/$experienceId'
+    | '/_authenticated/app/experiences/new'
     | '/_authenticated/app/leads/$leadId'
+    | '/_authenticated/app/experiences/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -290,13 +316,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAppAnalyticsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/app/experiences': {
-      id: '/_authenticated/app/experiences'
-      path: '/app/experiences'
-      fullPath: '/app/experiences'
-      preLoaderRoute: typeof AuthenticatedAppExperiencesRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
     '/_authenticated/app/inbox': {
       id: '/_authenticated/app/inbox'
       path: '/app/inbox'
@@ -318,6 +337,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAppSettingsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/app/experiences/': {
+      id: '/_authenticated/app/experiences/'
+      path: '/app/experiences'
+      fullPath: '/app/experiences/'
+      preLoaderRoute: typeof AuthenticatedAppExperiencesIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/app/experiences/$experienceId': {
+      id: '/_authenticated/app/experiences/$experienceId'
+      path: '/app/experiences/$experienceId'
+      fullPath: '/app/experiences/$experienceId'
+      preLoaderRoute: typeof AuthenticatedAppExperiencesExperienceIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/app/experiences/new': {
+      id: '/_authenticated/app/experiences/new'
+      path: '/app/experiences/new'
+      fullPath: '/app/experiences/new'
+      preLoaderRoute: typeof AuthenticatedAppExperiencesNewRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/app/leads/$leadId': {
       id: '/_authenticated/app/leads/$leadId'
       path: '/app/leads/$leadId'
@@ -331,21 +371,26 @@ declare module '@tanstack/react-router' {
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedOnboardingRoute: typeof AuthenticatedOnboardingRoute
   AuthenticatedAppAnalyticsRoute: typeof AuthenticatedAppAnalyticsRoute
-  AuthenticatedAppExperiencesRoute: typeof AuthenticatedAppExperiencesRoute
   AuthenticatedAppInboxRoute: typeof AuthenticatedAppInboxRoute
   AuthenticatedAppKnowledgeRoute: typeof AuthenticatedAppKnowledgeRoute
   AuthenticatedAppSettingsRoute: typeof AuthenticatedAppSettingsRoute
+  AuthenticatedAppExperiencesExperienceIdRoute: typeof AuthenticatedAppExperiencesExperienceIdRoute
+  AuthenticatedAppExperiencesNewRoute: typeof AuthenticatedAppExperiencesNewRoute
   AuthenticatedAppLeadsLeadIdRoute: typeof AuthenticatedAppLeadsLeadIdRoute
+  AuthenticatedAppExperiencesIndexRoute: typeof AuthenticatedAppExperiencesIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedOnboardingRoute: AuthenticatedOnboardingRoute,
   AuthenticatedAppAnalyticsRoute: AuthenticatedAppAnalyticsRoute,
-  AuthenticatedAppExperiencesRoute: AuthenticatedAppExperiencesRoute,
   AuthenticatedAppInboxRoute: AuthenticatedAppInboxRoute,
   AuthenticatedAppKnowledgeRoute: AuthenticatedAppKnowledgeRoute,
   AuthenticatedAppSettingsRoute: AuthenticatedAppSettingsRoute,
+  AuthenticatedAppExperiencesExperienceIdRoute:
+    AuthenticatedAppExperiencesExperienceIdRoute,
+  AuthenticatedAppExperiencesNewRoute: AuthenticatedAppExperiencesNewRoute,
   AuthenticatedAppLeadsLeadIdRoute: AuthenticatedAppLeadsLeadIdRoute,
+  AuthenticatedAppExperiencesIndexRoute: AuthenticatedAppExperiencesIndexRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
