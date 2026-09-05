@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback } from "react";
 
 import {
   CommandDialog,
@@ -94,22 +94,4 @@ export function CommandMenu({ open, onOpenChange }: CommandMenuProps) {
       </CommandList>
     </CommandDialog>
   );
-}
-
-/** Raccourci global Cmd+K / Ctrl+K. */
-export function useCommandMenu() {
-  const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key.toLowerCase() === "k" && (event.metaKey || event.ctrlKey)) {
-        event.preventDefault();
-        setOpen((value) => !value);
-      }
-    };
-    document.addEventListener("keydown", onKeyDown);
-    return () => document.removeEventListener("keydown", onKeyDown);
-  }, []);
-
-  return { open, setOpen };
 }
