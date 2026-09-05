@@ -100,20 +100,26 @@ export function extractDeterministic(
 
   if (allow("location")) {
     const streetMatch = ADDRESS_REGEX.exec(text);
-    const street = streetMatch?.[1]?.trim();
-    if (street) {
-      const rest = text.slice((streetMatch?.index ?? 0) + (streetMatch?.[0]?.length ?? 0));
-      const cityMatch = CITY_REGEX.exec(rest) ?? CITY_REGEX.exec(text);
-      const city = cityMatch?.[1]?.trim();
-      const value = city && !street.includes(city) ? `${street}, ${city}` : street;
+    const raw = streetMatch?.[1]?.trim();
+    if (raw) {
+      const inline = /^(.+?)\s+(?:à|a)\s+(\p{Lu}[\p{L}'-]{2,}(?:\s+\p{Lu}[\p{L}'-]{2,})?)$/u.exec(raw);
+      let value = raw;
+      if (inline?.[1] && inline[2]) {
+        value = `${inline[1].trim()}, ${inline[2].trim()}`;
+      } else {
+        const rest = text.slice((streetMatch?.index ?? 0) + (streetMatch?.[0]?.length ?? 0));
+        const city = CITY_REGEX.exec(rest)?.[1]?.trim();
+        if (city && !raw.includes(city)) value = `${raw}, ${city}`;
+      }
       extractions.push({
         fieldKey: "location",
         value,
         confidence: 0.8,
-        evidence: streetMatch?.[0]?.trim() ?? street,
+        evidence: streetMatch?.[0]?.trim() ?? raw,
       });
     }
   }
+
 
   return {
     extractions,
