@@ -129,7 +129,7 @@ export function LiveRelayTrace({ tone = "dark", className }: LiveRelayTraceProps
             setAnalyzedText(null);
           }}
           className={cn(
-            "relay-voice min-h-24 resize-none rounded-lg text-xl leading-snug sm:text-2xl",
+            "relay-voice min-h-28 resize-none rounded-lg text-2xl leading-snug sm:text-3xl",
             dark
               ? "border-relay-line-dark bg-relay-black text-relay-white placeholder:text-relay-muted-dark"
               : "bg-surface",
