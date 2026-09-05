@@ -327,9 +327,7 @@ export function VisitorFlow({ slug, demoHint, onLeadCreated }: VisitorFlowProps)
           <h1 className="text-3xl font-medium text-foreground">
             {state.definition.completion.title}
           </h1>
-          <p className="mt-2 text-base text-muted-foreground">
-            {state.definition.completion.body}
-          </p>
+          <p className="mt-2 text-base text-muted-foreground">{state.definition.completion.body}</p>
         </div>
         <SummaryList lines={completion.lines} title="Ce qui a été transmis" />
         <p className="text-sm text-muted-foreground">{completion.summary}</p>

@@ -16,7 +16,10 @@ export const Route = createFileRoute("/")({
         content:
           "Relay comprend ce qui est déjà dit, ne pose que la question manquante et transmet une demande structurée, qualifiée et prête à traiter.",
       },
-      { property: "og:title", content: "Relay — l’intake adaptatif pour les entreprises de services" },
+      {
+        property: "og:title",
+        content: "Relay — l’intake adaptatif pour les entreprises de services",
+      },
       {
         property: "og:description",
         content:
@@ -98,7 +101,8 @@ const audiences = [
     index: "04",
     name: "Conseil B2B",
     detail: "Distinguer le contexte, l’urgence et le décisionnaire dès la demande.",
-    example: "« Nous cherchons un accompagnement RGPD, décision prise par notre COMEX en octobre. »",
+    example:
+      "« Nous cherchons un accompagnement RGPD, décision prise par notre COMEX en octobre. »",
   },
 ] as const;
 
@@ -208,7 +212,8 @@ function Home() {
               <SectionLabel>// 01 · LE PROBLÈME</SectionLabel>
               <h2 className="relay-h2 mt-6">
                 Le formulaire demande à l’humain de{" "}
-                <span className="relay-voice text-relay-red">penser comme une base de données</span>.
+                <span className="relay-voice text-relay-red">penser comme une base de données</span>
+                .
               </h2>
             </div>
             <div className="lg:col-span-7">
@@ -267,7 +272,9 @@ function Home() {
                 </div>
               ) : (
                 <div id="panel-relay" role="tabpanel" aria-labelledby="tab-relay" className="mt-8">
-                  <p className="relay-voice text-2xl leading-snug">{demoConfig.referenceSentence}</p>
+                  <p className="relay-voice text-2xl leading-snug">
+                    {demoConfig.referenceSentence}
+                  </p>
                   <ul className="mt-6 grid gap-3 sm:grid-cols-2">
                     {relayFacts.map((fact) => (
                       <li key={fact.label} className="border-l-2 border-relay-blue pl-3">
@@ -292,7 +299,9 @@ function Home() {
         <section id="live-trace" className="bg-relay-red py-20 text-relay-white lg:py-32">
           <div className="relay-container">
             <SectionLabel tone="dark">// 02 · LA TRANSFORMATION</SectionLabel>
-            <h2 className="relay-h2 mt-6 max-w-3xl">Une phrase. Quatre réponses. Zéro répétition.</h2>
+            <h2 className="relay-h2 mt-6 max-w-3xl">
+              Une phrase. Quatre réponses. Zéro répétition.
+            </h2>
 
             <div className="mt-12 grid gap-10 lg:grid-cols-12">
               <div className="lg:col-span-5">
@@ -325,7 +334,11 @@ function Home() {
               <div className="lg:col-span-7">
                 <div className="rounded-2xl bg-relay-black p-6 sm:p-8">
                   <p className="relay-label text-relay-muted-dark">
-                    {relayTraceCaptions[(["heard", "understood", "missing", "ready"] as const)[traceStep]!]}
+                    {
+                      relayTraceCaptions[
+                        (["heard", "understood", "missing", "ready"] as const)[traceStep]!
+                      ]
+                    }
                   </p>
                   <p className="relay-voice mt-4 text-xl leading-snug sm:text-2xl">
                     {demoConfig.referenceSentence}
@@ -482,7 +495,8 @@ function Home() {
                         <span
                           className={cn(
                             "font-display block text-2xl font-bold sm:text-3xl",
-                            audience === index && "underline decoration-relay-red decoration-4 underline-offset-8",
+                            audience === index &&
+                              "underline decoration-relay-red decoration-4 underline-offset-8",
                           )}
                         >
                           {item.name}

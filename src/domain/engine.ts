@@ -230,19 +230,18 @@ export function nextStep({
     return { kind: "review" };
   }
 
-  const candidates = rankQuestions(
-    definition,
-    eligibleQuestions(definition, values, askedKeys),
-  );
+  const candidates = rankQuestions(definition, eligibleQuestions(definition, values, askedKeys));
   const best = candidates[0];
   if (!best) {
     return { kind: "review" };
   }
   if (askedKeys.length >= definition.maxQuestions) {
-    return { kind: "max_questions_reached", missingFields: missingRequiredFields(definition, values) };
+    return {
+      kind: "max_questions_reached",
+      missingFields: missingRequiredFields(definition, values),
+    };
   }
   return { kind: "question", question: best };
-
 }
 
 /** Progression sémantique : phases terminées / en cours / à venir, jamais « question 4 sur 12 ». */
@@ -252,9 +251,7 @@ export function computeProgress(
 ): PhaseProgress[] {
   const accepted = acceptedMap(definition, values);
   const phaseDone = (phaseKey: string): boolean => {
-    const fields = definition.fields.filter(
-      (field) => field.phase === phaseKey && field.required,
-    );
+    const fields = definition.fields.filter((field) => field.phase === phaseKey && field.required);
     if (fields.length === 0) return false;
     return fields.every((field) => accepted.has(field.key));
   };

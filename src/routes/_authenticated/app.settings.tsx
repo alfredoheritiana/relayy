@@ -37,9 +37,7 @@ function SettingsPage() {
         <p className="text-sm text-muted-foreground">Chargement…</p>
       ) : !organization ? (
         <div className="rounded-lg border border-border bg-card p-6">
-          <p className="text-sm text-muted-foreground">
-            Aucun espace configuré pour ce compte.
-          </p>
+          <p className="text-sm text-muted-foreground">Aucun espace configuré pour ce compte.</p>
           <Button asChild className="mt-4">
             <Link to="/onboarding">Créer mon organisation</Link>
           </Button>

@@ -142,7 +142,11 @@ export async function persistValues(
 export async function logEvent(
   session: Pick<SessionRecord, "id" | "organizationId">,
   eventName: string,
-  extra: { phase?: string | null; questionKey?: string | null; metadata?: Record<string, unknown> } = {},
+  extra: {
+    phase?: string | null;
+    questionKey?: string | null;
+    metadata?: Record<string, unknown>;
+  } = {},
 ): Promise<void> {
   await supabaseAdmin.from("interaction_events").insert({
     organization_id: session.organizationId,

@@ -63,8 +63,7 @@ export function RelayTrace({
   liveLabel,
   onSelect,
 }: RelayTraceProps) {
-  const items: readonly RelayTraceStep[] =
-    steps ?? relayTraceOrder.map((state) => ({ state }));
+  const items: readonly RelayTraceStep[] = steps ?? relayTraceOrder.map((state) => ({ state }));
   const isVertical = orientation === "vertical";
 
   return (
@@ -75,12 +74,7 @@ export function RelayTrace({
             relayTraceCaptions[items[Math.min(current, items.length - 1)]!.state]
           }`}
       </p>
-      <ol
-        className={cn(
-          "flex w-full min-w-0",
-          isVertical ? "flex-col" : "flex-row items-start",
-        )}
-      >
+      <ol className={cn("flex w-full min-w-0", isVertical ? "flex-col" : "flex-row items-start")}>
         {items.map((item, index) => {
           const done = index < current;
           const active = index === current;
@@ -156,9 +150,7 @@ export function RelayTrace({
                     isVertical ? "flex-row items-start gap-3" : "flex-col",
                   )}
                 >
-                  <span className="sr-only">
-                    {`${label} — ${relayTraceCaptions[item.state]}`}
-                  </span>
+                  <span className="sr-only">{`${label} — ${relayTraceCaptions[item.state]}`}</span>
                   {content}
                 </button>
               ) : (

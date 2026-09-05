@@ -23,8 +23,7 @@ export function LegalNotice() {
           Numéro d’entreprise : {legalEntity.registrationNumber}
         </p>
         <p className="mt-1 text-muted-foreground">
-          Responsable du traitement : {legalEntity.dataController} ·{" "}
-          {legalEntity.contactEmail}
+          Responsable du traitement : {legalEntity.dataController} · {legalEntity.contactEmail}
         </p>
         <p className="mt-1 text-muted-foreground">
           Conservation des données : {legalEntity.retentionMonths} mois.

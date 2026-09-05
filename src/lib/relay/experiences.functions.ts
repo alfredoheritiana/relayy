@@ -38,7 +38,11 @@ function slugify(value: string): string {
 }
 
 /** Les réglages de l'éditeur sont conservés dans `branding.editor`. */
-function readSettings(branding: unknown, fallbackName: string, fallbackGoal: string): ExperienceSettings {
+function readSettings(
+  branding: unknown,
+  fallbackName: string,
+  fallbackGoal: string,
+): ExperienceSettings {
   const editor =
     branding && typeof branding === "object" && "editor" in branding
       ? (branding as { editor: unknown }).editor

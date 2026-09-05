@@ -157,7 +157,11 @@ function LeadDetailPage() {
               </dl>
               <div className="mt-4 flex flex-wrap gap-2">
                 {data.lead.email ? (
-                  <Button size="sm" variant="outline" onClick={() => copy("email", data.lead.email!)}>
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    onClick={() => copy("email", data.lead.email!)}
+                  >
                     Copier l’e-mail
                   </Button>
                 ) : null}
@@ -206,9 +210,7 @@ function LeadDetailPage() {
               {data.lead.missingFields.length > 0 ? (
                 <p className="mt-5 rounded-lg border border-border bg-paper p-3 text-sm text-muted-foreground">
                   Informations manquantes :{" "}
-                  {data.lead.missingFields
-                    .map((field) => FIELD_LABELS[field] ?? field)
-                    .join(", ")}
+                  {data.lead.missingFields.map((field) => FIELD_LABELS[field] ?? field).join(", ")}
                 </p>
               ) : null}
             </section>

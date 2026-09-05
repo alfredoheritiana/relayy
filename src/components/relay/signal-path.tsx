@@ -46,10 +46,7 @@ export function SignalPath({
       ) : null}
       <ol
         aria-hidden="true"
-        className={cn(
-          "flex",
-          isVertical ? "flex-col gap-0" : "flex-row items-center gap-0",
-        )}
+        className={cn("flex", isVertical ? "flex-col gap-0" : "flex-row items-center gap-0")}
       >
         {nodes.map((node, index) => (
           <li
@@ -123,10 +120,7 @@ export function SignalPath({
 }
 
 /** Construit les nœuds à partir d'un index d'étape courante. */
-export function nodesFromIndex(
-  labels: readonly string[],
-  currentIndex: number,
-): SignalNode[] {
+export function nodesFromIndex(labels: readonly string[], currentIndex: number): SignalNode[] {
   return labels.map((label, index) => ({
     key: `${index}-${label}`,
     label,

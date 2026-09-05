@@ -184,8 +184,7 @@ function InboxPage() {
                 : "Aucune demande pour ce filtre."}
             </p>
             <p className="mt-2 text-sm text-muted-foreground">
-              Partagez le lien de votre parcours pour commencer à recevoir des demandes
-              structurées.
+              Partagez le lien de votre parcours pour commencer à recevoir des demandes structurées.
             </p>
             <div className="mt-5 flex flex-wrap justify-center gap-2">
               <Button asChild size="sm">

@@ -56,9 +56,7 @@ describe("acceptation des valeurs", () => {
   });
 
   it("un e-mail ne peut jamais être satisfait par inférence", () => {
-    const accepted = acceptedMap(def, [
-      value("email", "test@exemple.be", "extracted_high", 0.99),
-    ]);
+    const accepted = acceptedMap(def, [value("email", "test@exemple.be", "extracted_high", 0.99)]);
     expect(accepted.has("email")).toBe(false);
     expect(contactSatisfied(def, [value("email", "test@exemple.be", "extracted_high", 0.99)])).toBe(
       false,

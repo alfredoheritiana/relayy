@@ -87,7 +87,9 @@ function ExperiencesPage() {
                 <div className="min-w-0">
                   <p className="text-base font-medium text-foreground">{experience.name}</p>
                   <p className="mt-1 text-sm text-muted-foreground">{experience.goal}</p>
-                  <p className="mt-3 font-mono text-xs text-muted-foreground">/e/{experience.slug}</p>
+                  <p className="mt-3 font-mono text-xs text-muted-foreground">
+                    /e/{experience.slug}
+                  </p>
                 </div>
                 <div className="text-right">
                   <Badge variant="secondary">
