@@ -11,7 +11,9 @@
  */
 
 @theme inline {
-  --font-sans: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Bricolage Grotesque", "Manrope", ui-sans-serif, sans-serif;
+  --font-serif: "Instrument Serif", ui-serif, Georgia, serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
 
   --radius-sm: calc(var(--radius) - 4px);
@@ -51,6 +53,18 @@
   --color-success-foreground: var(--success-foreground);
   --color-warning: var(--warning);
   --color-warning-foreground: var(--warning-foreground);
+
+  --color-relay-black: var(--relay-black);
+  --color-relay-ink: var(--relay-ink);
+  --color-relay-white: var(--relay-white);
+  --color-relay-red: var(--relay-red);
+  --color-relay-red-dark: var(--relay-red-dark);
+  --color-relay-blue: var(--relay-blue);
+  --color-relay-lime: var(--relay-lime);
+  --color-relay-orange: var(--relay-orange);
+  --color-relay-muted-dark: var(--relay-muted-dark);
+  --color-relay-line: var(--relay-line);
+  --color-relay-line-dark: var(--relay-line-dark);
 }
 
 :root {
