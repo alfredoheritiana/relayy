@@ -1,0 +1,1 @@
+ALTER FUNCTION public.create_workspace(text, text, text, text, text[], text[], text[]) VOLATILE;
