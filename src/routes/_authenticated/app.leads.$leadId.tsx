@@ -4,7 +4,6 @@ import { useServerFn } from "@tanstack/react-start";
 import { useState } from "react";
 import { toast } from "sonner";
 
-
 import { AppShell } from "@/components/relay/app-shell";
 import { SignalPath } from "@/components/relay/signal-path";
 import { Badge } from "@/components/ui/badge";
@@ -30,7 +29,6 @@ export const Route = createFileRoute("/_authenticated/app/leads/$leadId")({
 const statuses = ["new", "to_contact", "qualified", "not_a_fit", "done"] as const;
 type LeadStatus = (typeof statuses)[number];
 type LeadDetailData = Awaited<ReturnType<typeof getLeadDetail>>;
-
 
 const FIELD_LABELS: Record<string, string> = {
   service: "Projet",
@@ -91,7 +89,6 @@ function LeadDetailPage() {
     },
   });
 
-
   const data = detail.data;
 
   const copy = async (label: string, value: string) => {
@@ -136,7 +133,6 @@ function LeadDetailPage() {
           </Button>
         </div>
       ) : (
-
         <div className="grid gap-6 lg:grid-cols-12">
           <div className="space-y-6 lg:col-span-8">
             {/* 1. Statut + action recommandée */}
