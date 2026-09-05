@@ -126,8 +126,17 @@ function LeadDetailPage() {
           </Button>
         </div>
       ) : !data ? (
-        <p className="text-sm text-muted-foreground">Demande introuvable.</p>
+        <div className="rounded-2xl border border-dashed border-border p-10 text-center">
+          <p className="text-base text-foreground">Demande introuvable ou accès refusé.</p>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Cette demande n’existe pas ou n’appartient pas à votre organisation.
+          </p>
+          <Button asChild size="sm" className="mt-5">
+            <Link to="/app/inbox">Retour à l’inbox</Link>
+          </Button>
+        </div>
       ) : (
+
         <div className="grid gap-6 lg:grid-cols-12">
           <div className="space-y-6 lg:col-span-8">
             {/* 1. Statut + action recommandée */}
