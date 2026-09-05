@@ -293,3 +293,12 @@
   border: 1px solid rgba(0, 0, 0, 0.08);
   box-shadow: 0 4px 0 rgba(0, 0, 0, 0.05);
 }
+
+/* Masque le badge « Edit with Lovable » injecté sur le site publié. */
+#lovable-badge,
+#lovable-badge-cta,
+#lovable-badge-text,
+#lovable-badge-divider,
+#lovable-badge-close {
+  display: none !important;
+}
