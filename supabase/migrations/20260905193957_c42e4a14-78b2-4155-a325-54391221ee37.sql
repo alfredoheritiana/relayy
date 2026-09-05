@@ -1,0 +1,1 @@
+COMMENT ON TABLE public.profiles IS 'Public application profiles synchronized from Supabase Auth';
