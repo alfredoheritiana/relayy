@@ -67,11 +67,13 @@ function LeadDetailPage() {
       await queryClient.cancelQueries({ queryKey: ["lead", leadId] });
       const previous = queryClient.getQueryData<LeadDetailData>(["lead", leadId]);
       if (previous?.lead) {
-        queryClient.setQueryData<LeadDetailData>(["lead", leadId], {
+        const next: LeadDetailData = {
           ...previous,
           lead: { ...previous.lead, status },
-        });
+        };
+        queryClient.setQueryData(["lead", leadId], next);
       }
+
       return { previous };
     },
     onError: (_error, _status, ctx) => {
