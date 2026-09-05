@@ -25,7 +25,7 @@ interface VisitorFlowProps {
 
 /** Le chargement ne doit jamais dépasser cette durée sans issue. */
 const SLOW_AFTER_MS = 1_500;
-const TIMEOUT_MS = 8_000;
+const TIMEOUT_MS = 20_000;
 
 const LOCAL_FIELD_LABELS: Record<string, string> = {
   service: "Service",
