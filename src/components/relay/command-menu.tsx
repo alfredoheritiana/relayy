@@ -51,7 +51,7 @@ export function CommandMenu({ open, onOpenChange }: CommandMenuProps) {
   );
 
   return (
-    <CommandDialog open={open} onOpenChange={onOpenChange} title="Commandes Relay">
+    <CommandDialog open={open} onOpenChange={onOpenChange}>
       <CommandInput placeholder="Rechercher une page ou une demande (nom, e-mail)…" />
       <CommandList>
         <CommandEmpty>Aucun résultat.</CommandEmpty>
