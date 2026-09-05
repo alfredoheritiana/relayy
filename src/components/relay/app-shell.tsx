@@ -62,7 +62,9 @@ export function AppShell({
       <p className="mt-6 font-mono text-[10px] uppercase tracking-[0.14em] text-background/45">
         Organisation
       </p>
-      <p className="mt-1 truncate text-sm text-background">{organizationName ?? "Non configurée"}</p>
+      <p className="mt-1 truncate text-sm text-background">
+        {organizationName ?? "Non configurée"}
+      </p>
 
       <div className="mt-8">
         <NavLinks onNavigate={() => setMenuOpen(false)} />

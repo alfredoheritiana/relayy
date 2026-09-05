@@ -112,9 +112,7 @@ export interface LeadListItem {
 }
 
 export const listLeads = createServerFn({ method: "GET" })
-  .inputValidator((data: unknown) =>
-    z.object({ status: z.string().optional() }).parse(data ?? {}),
-  )
+  .inputValidator((data: unknown) => z.object({ status: z.string().optional() }).parse(data ?? {}))
   .middleware([requireSupabaseAuth])
   .handler(async ({ context, data }): Promise<LeadListItem[]> => {
     let query = context.supabase
@@ -320,11 +318,11 @@ export const getAnalytics = createServerFn({ method: "GET" })
   .handler(async ({ context }) => {
     const [{ data: sessions }, { data: leads }, { data: events }] = await Promise.all([
       context.supabase.from("interaction_sessions").select("id, status, started_at").limit(1000),
-      context.supabase.from("leads").select("id, overall_score, status, missing_fields").limit(1000),
       context.supabase
-        .from("interaction_events")
-        .select("event_name, question_key")
-        .limit(2000),
+        .from("leads")
+        .select("id, overall_score, status, missing_fields")
+        .limit(1000),
+      context.supabase.from("interaction_events").select("event_name, question_key").limit(2000),
     ]);
 
     const sessionRows = sessions ?? [];
