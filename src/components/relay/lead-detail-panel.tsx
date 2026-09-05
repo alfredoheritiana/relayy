@@ -114,10 +114,7 @@ export function LeadDetailPanel({ leadId, variant = "page", className }: LeadDet
   if (!data) {
     return (
       <div
-        className={cn(
-          "rounded-2xl border border-dashed border-border p-10 text-center",
-          className,
-        )}
+        className={cn("rounded-2xl border border-dashed border-border p-10 text-center", className)}
       >
         <p className="text-base text-foreground">Demande introuvable ou accès refusé.</p>
         <p className="mt-2 text-sm text-muted-foreground">
@@ -133,13 +130,7 @@ export function LeadDetailPanel({ leadId, variant = "page", className }: LeadDet
   const split = variant === "split";
 
   return (
-    <div
-      className={cn(
-        "grid gap-6",
-        split ? "grid-cols-1" : "lg:grid-cols-12",
-        className,
-      )}
-    >
+    <div className={cn("grid gap-6", split ? "grid-cols-1" : "lg:grid-cols-12", className)}>
       <div className={cn("space-y-6", split ? "" : "lg:col-span-8")}>
         <section className="rounded-2xl border border-border bg-ink p-6 text-background">
           <div className="flex flex-wrap items-center gap-3">
@@ -179,7 +170,10 @@ export function LeadDetailPanel({ leadId, variant = "page", className }: LeadDet
         </section>
 
         <section className="rounded-2xl border border-border bg-surface p-6">
-          <motion.h2 layoutId={`lead-title-${leadId}`} className="text-xl font-medium text-foreground">
+          <motion.h2
+            layoutId={`lead-title-${leadId}`}
+            className="text-xl font-medium text-foreground"
+          >
             {data.lead.contactName ?? data.lead.email ?? "Contact sans nom"}
           </motion.h2>
           <dl className="mt-4 grid gap-3 text-sm sm:grid-cols-2">
