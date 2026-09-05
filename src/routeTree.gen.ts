@@ -14,7 +14,10 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as DemoRouteImport } from './routes/demo'
 import { Route as AuthenticatedOnboardingRouteImport } from './routes/_authenticated/onboarding'
+import { Route as AppIndexRouteImport } from './routes/app.index'
 import { Route as ESlugRouteImport } from './routes/e.$slug'
+import { Route as LegalConditionsRouteImport } from './routes/legal.conditions'
+import { Route as LegalConfidentialiteRouteImport } from './routes/legal.confidentialite'
 import { Route as AuthenticatedAppAnalyticsRouteImport } from './routes/_authenticated/app.analytics'
 import { Route as AuthenticatedAppExperiencesRouteImport } from './routes/_authenticated/app.experiences'
 import { Route as AuthenticatedAppInboxRouteImport } from './routes/_authenticated/app.inbox'
@@ -46,9 +49,24 @@ const AuthenticatedOnboardingRoute = AuthenticatedOnboardingRouteImport.update({
   path: '/onboarding',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AppIndexRoute = AppIndexRouteImport.update({
+  id: '/app/',
+  path: '/app/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ESlugRoute = ESlugRouteImport.update({
   id: '/e/$slug',
   path: '/e/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LegalConditionsRoute = LegalConditionsRouteImport.update({
+  id: '/legal/conditions',
+  path: '/legal/conditions',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LegalConfidentialiteRoute = LegalConfidentialiteRouteImport.update({
+  id: '/legal/confidentialite',
+  path: '/legal/confidentialite',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthenticatedAppAnalyticsRoute =
@@ -93,6 +111,9 @@ export interface FileRoutesByFullPath {
   '/demo': typeof DemoRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
   '/e/$slug': typeof ESlugRoute
+  '/legal/conditions': typeof LegalConditionsRoute
+  '/legal/confidentialite': typeof LegalConfidentialiteRoute
+  '/app/': typeof AppIndexRoute
   '/app/analytics': typeof AuthenticatedAppAnalyticsRoute
   '/app/experiences': typeof AuthenticatedAppExperiencesRoute
   '/app/inbox': typeof AuthenticatedAppInboxRoute
@@ -106,6 +127,9 @@ export interface FileRoutesByTo {
   '/demo': typeof DemoRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
   '/e/$slug': typeof ESlugRoute
+  '/legal/conditions': typeof LegalConditionsRoute
+  '/legal/confidentialite': typeof LegalConfidentialiteRoute
+  '/app': typeof AppIndexRoute
   '/app/analytics': typeof AuthenticatedAppAnalyticsRoute
   '/app/experiences': typeof AuthenticatedAppExperiencesRoute
   '/app/inbox': typeof AuthenticatedAppInboxRoute
@@ -121,6 +145,9 @@ export interface FileRoutesById {
   '/demo': typeof DemoRoute
   '/_authenticated/onboarding': typeof AuthenticatedOnboardingRoute
   '/e/$slug': typeof ESlugRoute
+  '/legal/conditions': typeof LegalConditionsRoute
+  '/legal/confidentialite': typeof LegalConfidentialiteRoute
+  '/app/': typeof AppIndexRoute
   '/_authenticated/app/analytics': typeof AuthenticatedAppAnalyticsRoute
   '/_authenticated/app/experiences': typeof AuthenticatedAppExperiencesRoute
   '/_authenticated/app/inbox': typeof AuthenticatedAppInboxRoute
@@ -136,6 +163,9 @@ export interface FileRouteTypes {
     | '/demo'
     | '/onboarding'
     | '/e/$slug'
+    | '/legal/conditions'
+    | '/legal/confidentialite'
+    | '/app/'
     | '/app/analytics'
     | '/app/experiences'
     | '/app/inbox'
@@ -149,6 +179,9 @@ export interface FileRouteTypes {
     | '/demo'
     | '/onboarding'
     | '/e/$slug'
+    | '/legal/conditions'
+    | '/legal/confidentialite'
+    | '/app'
     | '/app/analytics'
     | '/app/experiences'
     | '/app/inbox'
@@ -163,6 +196,9 @@ export interface FileRouteTypes {
     | '/demo'
     | '/_authenticated/onboarding'
     | '/e/$slug'
+    | '/legal/conditions'
+    | '/legal/confidentialite'
+    | '/app/'
     | '/_authenticated/app/analytics'
     | '/_authenticated/app/experiences'
     | '/_authenticated/app/inbox'
@@ -177,6 +213,9 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   DemoRoute: typeof DemoRoute
   ESlugRoute: typeof ESlugRoute
+  LegalConditionsRoute: typeof LegalConditionsRoute
+  LegalConfidentialiteRoute: typeof LegalConfidentialiteRoute
+  AppIndexRoute: typeof AppIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -216,11 +255,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedOnboardingRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/app/': {
+      id: '/app/'
+      path: '/app'
+      fullPath: '/app/'
+      preLoaderRoute: typeof AppIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/e/$slug': {
       id: '/e/$slug'
       path: '/e/$slug'
       fullPath: '/e/$slug'
       preLoaderRoute: typeof ESlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/legal/conditions': {
+      id: '/legal/conditions'
+      path: '/legal/conditions'
+      fullPath: '/legal/conditions'
+      preLoaderRoute: typeof LegalConditionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/legal/confidentialite': {
+      id: '/legal/confidentialite'
+      path: '/legal/confidentialite'
+      fullPath: '/legal/confidentialite'
+      preLoaderRoute: typeof LegalConfidentialiteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated/app/analytics': {
@@ -297,6 +357,9 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   DemoRoute: DemoRoute,
   ESlugRoute: ESlugRoute,
+  LegalConditionsRoute: LegalConditionsRoute,
+  LegalConfidentialiteRoute: LegalConfidentialiteRoute,
+  AppIndexRoute: AppIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

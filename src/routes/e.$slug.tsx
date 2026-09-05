@@ -1,7 +1,7 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { Link, createFileRoute } from "@tanstack/react-router";
 
 import { VisitorFlow } from "@/components/relay/visitor-flow";
-import { product } from "@/config/product";
+import { demoConfig, product } from "@/config/product";
 
 export const Route = createFileRoute("/e/$slug")({
   head: () => ({
@@ -23,27 +23,47 @@ export const Route = createFileRoute("/e/$slug")({
   }),
   component: PublicExperiencePage,
   errorComponent: () => (
-    <div className="mx-auto max-w-2xl px-4 py-16 text-center">
-      <h1 className="text-xl font-semibold text-foreground">Parcours indisponible</h1>
+    <div className="mx-auto max-w-2xl px-5 py-16 text-center">
+      <h1 className="text-2xl font-semibold text-foreground">Parcours indisponible</h1>
       <p className="mt-2 text-sm text-muted-foreground">
         Ce lien n’est pas actif. Contactez l’entreprise pour obtenir un lien à jour.
       </p>
     </div>
   ),
   notFoundComponent: () => (
-    <div className="mx-auto max-w-2xl px-4 py-16 text-center">
-      <h1 className="text-xl font-semibold text-foreground">Parcours introuvable</h1>
+    <div className="mx-auto max-w-2xl px-5 py-16 text-center">
+      <h1 className="text-2xl font-semibold text-foreground">Parcours introuvable</h1>
     </div>
   ),
 });
 
 function PublicExperiencePage() {
   const { slug } = Route.useParams();
+  const isDemo = slug === demoConfig.experienceSlug;
 
   return (
-    <div className="min-h-screen bg-background">
-      <main className="mx-auto max-w-3xl px-4 py-10">
-        <VisitorFlow slug={slug} />
+    <div className="min-h-screen bg-paper">
+      <header className="border-b border-border bg-surface">
+        <div className="mx-auto flex max-w-3xl flex-wrap items-center justify-between gap-3 px-5 py-4">
+          <Link to="/" className="flex items-center gap-2">
+            <span className="size-2 rounded-full bg-primary" aria-hidden="true" />
+            <span className="text-sm font-semibold text-foreground">
+              {isDemo ? demoConfig.organizationName : product.name}
+            </span>
+          </Link>
+          {isDemo ? (
+            <span className="rounded-full bg-ink px-3 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-background">
+              {demoConfig.badge}
+            </span>
+          ) : null}
+        </div>
+      </header>
+
+      <main className="mx-auto max-w-3xl px-5 py-10 sm:py-14">
+        <VisitorFlow
+          slug={slug}
+          {...(isDemo ? { demoHint: demoConfig.referenceSentence } : {})}
+        />
       </main>
     </div>
   );
