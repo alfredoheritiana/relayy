@@ -84,12 +84,16 @@ export const createWorkspace = createServerFn({ method: "POST" })
     const supabase = context.supabase;
     const slug = `${slugify(data.name)}-${Math.random().toString(36).slice(2, 8)}`;
 
-    const { data: org, error: orgError } = await supabase
+    // L'auteur n'est pas encore membre : on génère l'identifiant côté serveur
+    // pour éviter un RETURNING bloqué par la politique de lecture.
+    const organizationId = crypto.randomUUID();
+
+    const { error: orgError } = await supabase
       .from("organizations")
-      .insert({ name: data.name, slug, website_url: data.websiteUrl || null })
-      .select("id")
-      .single();
-    if (orgError || !org) throw new Error(orgError?.message ?? "Création impossible");
+      .insert({ id: organizationId, name: data.name, slug, website_url: data.websiteUrl || null });
+    if (orgError) throw new Error(orgError.message);
+
+    const org = { id: organizationId };
 
     const { error: memberError } = await supabase
       .from("organization_members")
@@ -209,10 +213,10 @@ export const getLeadDetail = createServerFn({ method: "GET" })
       scores: (scores ?? []).map((row) => ({
         dimension: row.dimension,
         score: row.score,
-        reasons: (row.reasons as string[] | null) ?? [],
+        reasons: normalizeReasons(row.reasons),
         ruleVersion: row.rule_version,
       })),
-      values: (values ?? []).map((row) => ({
+      values: dedupeValues(values ?? []).map((row) => ({
         fieldKey: row.field_key,
         value: String(row.value ?? ""),
         source: row.source,
@@ -225,6 +229,35 @@ export const getLeadDetail = createServerFn({ method: "GET" })
       })),
     };
   });
+
+interface RawSessionValue {
+  field_key: string;
+  value: unknown;
+  source: string;
+  confidence: number | null;
+}
+
+/** Les scores stockent des raisons structurées ; l'UI n'affiche que le texte. */
+function normalizeReasons(raw: unknown): string[] {
+  if (!Array.isArray(raw)) return [];
+  return raw
+    .map((entry) => {
+      if (typeof entry === "string") return entry;
+      if (entry && typeof entry === "object" && "reason" in entry) {
+        const reason = (entry as { reason: unknown }).reason;
+        return typeof reason === "string" ? reason : null;
+      }
+      return null;
+    })
+    .filter((entry): entry is string => entry !== null);
+}
+
+/** Une même information peut avoir plusieurs versions : on garde la dernière. */
+function dedupeValues<T extends RawSessionValue>(rows: T[]): T[] {
+  const byField = new Map<string, T>();
+  for (const row of rows) byField.set(row.field_key, row);
+  return [...byField.values()];
+}
 
 export const updateLeadStatus = createServerFn({ method: "POST" })
   .inputValidator((data: unknown) =>
