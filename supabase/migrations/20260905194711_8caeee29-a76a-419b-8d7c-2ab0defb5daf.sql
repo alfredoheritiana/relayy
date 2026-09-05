@@ -1,0 +1,12 @@
+REVOKE ALL ON public.interaction_sessions FROM anon;
+REVOKE ALL ON public.interaction_messages FROM anon;
+REVOKE ALL ON public.session_values FROM anon;
+REVOKE ALL ON public.interaction_events FROM anon;
+REVOKE ALL ON public.leads FROM anon;
+REVOKE ALL ON public.lead_scores FROM anon;
+GRANT ALL ON public.interaction_sessions TO service_role;
+GRANT ALL ON public.interaction_messages TO service_role;
+GRANT ALL ON public.session_values TO service_role;
+GRANT ALL ON public.interaction_events TO service_role;
+GRANT ALL ON public.leads TO service_role;
+GRANT ALL ON public.lead_scores TO service_role;
