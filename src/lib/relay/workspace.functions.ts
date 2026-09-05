@@ -87,8 +87,8 @@ export const createWorkspace = createServerFn({ method: "POST" })
     const { data: organizationId, error } = await supabase.rpc("create_workspace", {
       p_name: data.name,
       p_slug: slug,
-      p_website_url: data.websiteUrl || undefined,
-      p_description: data.description || undefined,
+      p_website_url: data.websiteUrl,
+      p_description: data.description,
       p_industries: data.industries,
       p_service_areas: data.serviceAreas,
       p_services: data.services,
