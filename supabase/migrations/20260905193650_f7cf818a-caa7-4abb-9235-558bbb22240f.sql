@@ -1,0 +1,1 @@
+REVOKE EXECUTE ON FUNCTION private.handle_new_auth_user() FROM service_role;
