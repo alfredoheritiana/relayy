@@ -6,6 +6,7 @@ import { useEffect, useMemo, useState } from "react";
 
 import { AppShell } from "@/components/relay/app-shell";
 import { LeadDetailPanel } from "@/components/relay/lead-detail-panel";
+import { MagneticButton } from "@/components/relay/magnetic-button";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -147,9 +148,9 @@ function InboxPage() {
         Partagez le lien de votre parcours pour commencer à recevoir des demandes structurées.
       </p>
       <div className="mt-5 flex flex-wrap justify-center gap-2">
-        <Button asChild size="sm">
+        <MagneticButton asChild size="sm">
           <Link to="/app/experiences">Voir mes expériences</Link>
-        </Button>
+        </MagneticButton>
         <Button asChild size="sm" variant="outline">
           <Link to="/demo">Revoir la démonstration</Link>
         </Button>
@@ -216,9 +217,9 @@ function InboxPage() {
       organizationName={organization?.name ?? null}
       actions={
         organization ? null : (
-          <Button asChild size="sm">
+          <MagneticButton asChild size="sm">
             <Link to="/onboarding">Configurer mon espace</Link>
-          </Button>
+          </MagneticButton>
         )
       }
     >
