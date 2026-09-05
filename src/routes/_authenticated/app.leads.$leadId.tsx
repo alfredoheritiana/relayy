@@ -26,6 +26,9 @@ export const Route = createFileRoute("/_authenticated/app/leads/$leadId")({
 });
 
 const statuses = ["new", "to_contact", "qualified", "not_a_fit", "done"] as const;
+type LeadStatus = (typeof statuses)[number];
+type LeadDetailData = Awaited<ReturnType<typeof getLeadDetail>>;
+
 
 const FIELD_LABELS: Record<string, string> = {
   service: "Projet",
