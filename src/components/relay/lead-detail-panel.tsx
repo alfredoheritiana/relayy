@@ -59,10 +59,8 @@ export function LeadDetailPanel({ leadId, variant = "page", className }: LeadDet
       await queryClient.cancelQueries({ queryKey: ["lead", leadId] });
       const previous = queryClient.getQueryData<LeadDetailData>(["lead", leadId]);
       if (previous?.lead) {
-        queryClient.setQueryData<LeadDetailData>(["lead", leadId], {
-          ...previous,
-          lead: { ...previous.lead, status },
-        });
+        const next: LeadDetailData = { ...previous, lead: { ...previous.lead, status } };
+        queryClient.setQueryData(["lead", leadId], next);
       }
       return { previous };
     },
