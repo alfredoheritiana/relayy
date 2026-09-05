@@ -30,14 +30,21 @@ interface Fact {
   readonly evidence: string;
 }
 
+const deaccent = (value: string): string =>
+  value
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+
 /** Découpe la phrase en segments, en soulignant les fragments compris. */
 function highlight(sentence: string, facts: readonly Fact[]) {
   const marks: Array<{ start: number; end: number; key: string }> = [];
-  const lower = sentence.toLowerCase();
+  const lower = deaccent(sentence);
   for (const fact of facts) {
-    const needle = fact.evidence.toLowerCase().trim();
+    const needle = deaccent(fact.evidence).trim();
     if (!needle) continue;
     const start = lower.indexOf(needle);
+
     if (start < 0) continue;
     const end = start + needle.length;
     if (marks.some((m) => start < m.end && end > m.start)) continue;
