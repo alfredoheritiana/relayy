@@ -164,7 +164,7 @@ function LeadDetailPage() {
                 <Button
                   size="sm"
                   variant="outline"
-                  onClick={() => copy("synthese", data.lead.summary ?? data.lead.intent)}
+                  onClick={() => copy("synthese", data.lead.summary ?? data.lead.intent ?? "")}
                 >
                   Copier la synthèse
                 </Button>
