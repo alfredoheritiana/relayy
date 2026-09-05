@@ -89,13 +89,15 @@ function AuthPage() {
     setNotice(null);
     try {
       if (mode === "signup") {
-        const { error: signUpError } = await supabase.auth.signUp({
+        const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
           email,
           password,
           options: { emailRedirectTo: `${window.location.origin}/app` },
         });
         if (signUpError) throw signUpError;
-        setNotice("Compte créé. Vérifiez votre boîte mail si une confirmation est demandée.");
+        if (!signUpData.session) {
+          setNotice("Compte créé. Vérifiez votre boîte mail pour confirmer votre adresse.");
+        }
       } else {
         const { error: signInError } = await supabase.auth.signInWithPassword({ email, password });
         if (signInError) throw signInError;

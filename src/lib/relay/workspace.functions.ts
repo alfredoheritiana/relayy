@@ -84,40 +84,18 @@ export const createWorkspace = createServerFn({ method: "POST" })
     const supabase = context.supabase;
     const slug = `${slugify(data.name)}-${Math.random().toString(36).slice(2, 8)}`;
 
-    // L'auteur n'est pas encore membre : on génère l'identifiant côté serveur
-    // pour éviter un RETURNING bloqué par la politique de lecture.
-    const organizationId = crypto.randomUUID();
-
-    const { error: orgError } = await supabase
-      .from("organizations")
-      .insert({ id: organizationId, name: data.name, slug, website_url: data.websiteUrl || null });
-    if (orgError) throw new Error(orgError.message);
-
-    const org = { id: organizationId };
-
-    const { error: memberError } = await supabase
-      .from("organization_members")
-      .insert({ organization_id: org.id, user_id: context.userId, role: "owner" });
-    if (memberError) throw new Error(memberError.message);
-
-    const { error: profileError } = await supabase.from("business_profiles").insert({
-      organization_id: org.id,
-      description: data.description || null,
-      industries: data.industries,
-      service_areas: data.serviceAreas,
-      target_customers: [],
-      status: "ready",
+    const { data: organizationId, error } = await supabase.rpc("create_workspace", {
+      p_name: data.name,
+      p_slug: slug,
+      p_website_url: data.websiteUrl || undefined,
+      p_description: data.description || undefined,
+      p_industries: data.industries,
+      p_service_areas: data.serviceAreas,
+      p_services: data.services,
     });
-    if (profileError) throw new Error(profileError.message);
 
-    if (data.services.length > 0) {
-      const { error: servicesError } = await supabase.from("services").insert(
-        data.services.map((name) => ({ organization_id: org.id, name })),
-      );
-      if (servicesError) throw new Error(servicesError.message);
-    }
-
-    return { organizationId: org.id };
+    if (error) throw new Error(error.message);
+    return { organizationId };
   });
 
 export interface LeadListItem {
