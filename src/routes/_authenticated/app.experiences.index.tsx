@@ -80,9 +80,14 @@ function ExperiencesPage() {
             Terminez la configuration de votre espace : Relay crée alors un premier parcours à
             partir de votre métier et de vos zones.
           </p>
-          <Button asChild className="mt-5" size="sm">
-            <Link to="/onboarding">Configurer mon espace</Link>
-          </Button>
+          <div className="mt-5 flex flex-wrap items-center justify-center gap-2">
+            <Button asChild size="sm">
+              <Link to="/app/experiences/new">Nouvelle expérience</Link>
+            </Button>
+            <Button asChild size="sm" variant="outline">
+              <Link to="/onboarding">Configurer mon espace</Link>
+            </Button>
+          </div>
         </div>
       ) : (
         <ul className="space-y-3">

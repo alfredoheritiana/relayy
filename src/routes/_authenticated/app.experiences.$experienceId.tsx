@@ -44,16 +44,24 @@ function ExperienceEditorPage() {
   const saveMutation = useMutation({
     mutationFn: (settings: ExperienceSettings) => save({ data: { experienceId, settings } }),
     onSuccess: () => {
+      toast.success("Brouillon enregistré.");
       queryClient.invalidateQueries({ queryKey: ["experience", experienceId] });
       queryClient.invalidateQueries({ queryKey: ["experiences"] });
+    },
+    onError: (error: unknown) => {
+      toast.error(error instanceof Error ? error.message : "Enregistrement impossible.");
     },
   });
 
   const publishMutation = useMutation({
     mutationFn: () => publish({ data: { experienceId } }),
-    onSuccess: () => {
+    onSuccess: (result) => {
+      toast.success(`Version ${result.versionNumber} publiée.`);
       queryClient.invalidateQueries({ queryKey: ["experience", experienceId] });
       queryClient.invalidateQueries({ queryKey: ["experiences"] });
+    },
+    onError: (error: unknown) => {
+      toast.error(error instanceof Error ? error.message : "Publication impossible.");
     },
   });
 
