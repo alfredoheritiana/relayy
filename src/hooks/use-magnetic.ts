@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, type CSSProperties, type MouseEvent } from "react";
 
 export interface MagneticOptions {
   /** Déplacement maximum en pixels. */
@@ -7,7 +7,7 @@ export interface MagneticOptions {
 
 /**
  * Effet magnétique : l'élément se déplace légèrement vers le curseur.
- * Désactivé si l'utilisateur préfère les animations réduites.
+ * Désactivé si l'utilisateur préfère les animations réduites ou n'a pas de souris.
  */
 export function useMagnetic<T extends HTMLElement>({ strength = 10 }: MagneticOptions = {}) {
   const ref = useRef<T | null>(null);
@@ -28,18 +28,21 @@ export function useMagnetic<T extends HTMLElement>({ strength = 10 }: MagneticOp
   }, []);
 
   const onMouseMove = useCallback(
-    (event: React.MouseEvent<T>) => {
+    (event: MouseEvent<T>) => {
       if (!enabled || !ref.current) return;
       const rect = ref.current.getBoundingClientRect();
-      const dx = event.clientX - (rect.left + rect.width / 2);
-      const dy = event.clientY - (rect.top + rect.height / 2);
-      const clamp = (value: number, max: number) => Math.max(-strength, Math.min(strength, value));
-      setOffset({ x: clamp(dx, rect.width), y: clamp(dy, rect.height) });
+      const clamp = (value: number) => Math.max(-strength, Math.min(strength, value));
+      setOffset({
+        x: clamp(event.clientX - (rect.left + rect.width / 2)),
+        y: clamp(event.clientY - (rect.top + rect.height / 2)),
+      });
     },
     [enabled, strength],
   );
 
   const onMouseLeave = useCallback(() => setOffset({ x: 0, y: 0 }), []);
+
+  const idle = offset.x === 0 && offset.y === 0;
 
   return {
     ref,
@@ -49,8 +52,8 @@ export function useMagnetic<T extends HTMLElement>({ strength = 10 }: MagneticOp
       onMouseLeave,
       style: {
         transform: `translate3d(${offset.x}px, ${offset.y}px, 0)`,
-        transition: offset.x === 0 && offset.y === 0 ? "transform 260ms ease-out" : "none",
-      } as React.CSSProperties,
+        transition: idle ? "transform 260ms ease-out" : "none",
+      } as CSSProperties,
     },
   };
 }
