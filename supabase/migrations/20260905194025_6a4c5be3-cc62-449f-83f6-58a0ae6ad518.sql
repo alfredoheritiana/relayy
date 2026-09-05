@@ -1,0 +1,1 @@
+REVOKE EXECUTE ON FUNCTION private.org_has_members(uuid) FROM service_role;

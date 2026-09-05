@@ -1,0 +1,1 @@
+REVOKE EXECUTE ON FUNCTION private.current_user_has_membership() FROM service_role;
