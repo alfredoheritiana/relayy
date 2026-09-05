@@ -84,12 +84,16 @@ export const createWorkspace = createServerFn({ method: "POST" })
     const supabase = context.supabase;
     const slug = `${slugify(data.name)}-${Math.random().toString(36).slice(2, 8)}`;
 
-    const { data: org, error: orgError } = await supabase
+    // L'auteur n'est pas encore membre : on génère l'identifiant côté serveur
+    // pour éviter un RETURNING bloqué par la politique de lecture.
+    const organizationId = crypto.randomUUID();
+
+    const { error: orgError } = await supabase
       .from("organizations")
-      .insert({ name: data.name, slug, website_url: data.websiteUrl || null })
-      .select("id")
-      .single();
-    if (orgError || !org) throw new Error(orgError?.message ?? "Création impossible");
+      .insert({ id: organizationId, name: data.name, slug, website_url: data.websiteUrl || null });
+    if (orgError) throw new Error(orgError.message);
+
+    const org = { id: organizationId };
 
     const { error: memberError } = await supabase
       .from("organization_members")
