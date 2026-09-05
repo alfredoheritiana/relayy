@@ -47,6 +47,7 @@ export function AppShell({
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [menuOpen, setMenuOpen] = useState(false);
+  const { open: commandOpen, setOpen: setCommandOpen } = useCommandMenu();
 
   const signOut = async () => {
     await queryClient.cancelQueries();
