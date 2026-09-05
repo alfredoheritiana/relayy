@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { product } from "@/config/product";
 import { listExperiences } from "@/lib/relay/workspace.functions";
 
-export const Route = createFileRoute("/_authenticated/app/experiences")({
+export const Route = createFileRoute("/_authenticated/app/experiences/")({
   head: () => ({
     meta: [
       { title: `Expériences d’intake — ${product.name}` },
