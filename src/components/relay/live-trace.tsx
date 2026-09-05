@@ -30,11 +30,12 @@ interface Fact {
   readonly evidence: string;
 }
 
+/** Retire les accents en conservant la longueur (index alignés sur la phrase). */
 const deaccent = (value: string): string =>
-  value
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "");
+  Array.from(value.toLowerCase())
+    .map((char) => char.normalize("NFD").replace(/[\u0300-\u036f]/g, "") || char)
+    .join("");
+
 
 /** Découpe la phrase en segments, en soulignant les fragments compris. */
 function highlight(sentence: string, facts: readonly Fact[]) {
