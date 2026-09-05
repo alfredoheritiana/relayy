@@ -11,7 +11,9 @@
  */
 
 @theme inline {
-  --font-sans: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Bricolage Grotesque", "Manrope", ui-sans-serif, sans-serif;
+  --font-serif: "Instrument Serif", ui-serif, Georgia, serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
 
   --radius-sm: calc(var(--radius) - 4px);
@@ -51,42 +53,70 @@
   --color-success-foreground: var(--success-foreground);
   --color-warning: var(--warning);
   --color-warning-foreground: var(--warning-foreground);
+
+  --color-relay-black: var(--relay-black);
+  --color-relay-ink: var(--relay-ink);
+  --color-relay-white: var(--relay-white);
+  --color-relay-red: var(--relay-red);
+  --color-relay-red-dark: var(--relay-red-dark);
+  --color-relay-blue: var(--relay-blue);
+  --color-relay-lime: var(--relay-lime);
+  --color-relay-orange: var(--relay-orange);
+  --color-relay-muted-dark: var(--relay-muted-dark);
+  --color-relay-line: var(--relay-line);
+  --color-relay-line-dark: var(--relay-line-dark);
 }
 
 :root {
-  --radius: 0.875rem;
+  --radius: 0.5rem;
 
-  --ink: oklch(0.1869 0.0107 268.11);
-  --paper: oklch(0.964 0.0082 91.48);
-  --surface: oklch(1 0 0);
-  --signal: oklch(0.8865 0.1976 126.42);
-  --signal-foreground: oklch(0.1869 0.0107 268.11);
-  --aqua: oklch(0.8339 0.0956 187.12);
+  /* Relay Editorial Intelligence — palette propriétaire */
+  --relay-black: #080808;
+  --relay-ink: #141414;
+  --relay-paper: #f6f2e9;
+  --relay-white: #fffdf8;
+  --relay-red: #e53245;
+  --relay-red-dark: #b9172a;
+  --relay-blue: #3d78ff;
+  --relay-lime: #b7e34b;
+  --relay-orange: #f06b32;
+  --relay-muted: #78746d;
+  --relay-muted-dark: #aaa69e;
+  --relay-line: #d7d1c7;
+  --relay-line-dark: #303030;
 
-  --background: oklch(0.964 0.0082 91.48);
-  --foreground: oklch(0.1869 0.0107 268.11);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.1869 0.0107 268.11);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.1869 0.0107 268.11);
-  --primary: oklch(0.5648 0.226 279.16);
-  --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.4537 0.214 276.06);
-  --secondary-foreground: oklch(1 0 0);
-  --muted: oklch(0.9772 0.0045 91.48);
-  --muted-foreground: oklch(0.5527 0.0225 270.01);
-  --accent: oklch(0.8339 0.0956 187.12);
-  --accent-foreground: oklch(0.1869 0.0107 268.11);
-  --destructive: oklch(0.5639 0.1706 24.43);
-  --destructive-foreground: oklch(1 0 0);
-  --warning: oklch(0.5955 0.131 62);
-  --warning-foreground: oklch(1 0 0);
-  --success: oklch(0.5184 0.101 160.9);
-  --success-foreground: oklch(1 0 0);
-  --border: oklch(0.8788 0.0097 93.58);
-  --input: oklch(0.8788 0.0097 93.58);
-  --ring: oklch(0.5648 0.226 279.16);
+  --ink: var(--relay-black);
+  --paper: var(--relay-paper);
+  --surface: var(--relay-white);
+  --signal: var(--relay-lime);
+  --signal-foreground: var(--relay-black);
+  --aqua: var(--relay-blue);
+
+  --background: var(--relay-paper);
+  --foreground: var(--relay-black);
+  --card: var(--relay-white);
+  --card-foreground: var(--relay-black);
+  --popover: var(--relay-white);
+  --popover-foreground: var(--relay-black);
+  --primary: var(--relay-red);
+  --primary-foreground: var(--relay-white);
+  --secondary: var(--relay-ink);
+  --secondary-foreground: var(--relay-white);
+  --muted: #efe9dd;
+  --muted-foreground: var(--relay-muted);
+  --accent: var(--relay-blue);
+  --accent-foreground: var(--relay-white);
+  --destructive: #c92b3b;
+  --destructive-foreground: var(--relay-white);
+  --warning: #b86413;
+  --warning-foreground: var(--relay-white);
+  --success: #237a55;
+  --success-foreground: var(--relay-white);
+  --border: var(--relay-line);
+  --input: var(--relay-line);
+  --ring: var(--relay-red);
 }
+
 
 @layer base {
   * {
@@ -178,4 +208,83 @@
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* --- Relay Editorial Intelligence : typographie et surfaces --- */
+
+@utility relay-display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 0.9;
+  text-wrap: balance;
+}
+
+@utility relay-h1 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(3rem, 8vw, 8.75rem);
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+}
+
+@utility relay-h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.25rem, 5.2vw, 5.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+}
+
+@utility relay-h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 2.6vw, 2.75rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+@utility relay-voice {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+@utility relay-label {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+@utility relay-container {
+  margin-inline: auto;
+  max-width: 1480px;
+  padding-inline: 1.125rem;
+}
+
+@media (min-width: 768px) {
+  .relay-container {
+    padding-inline: 2rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .relay-container {
+    padding-inline: 3.5rem;
+  }
+}
+
+@keyframes relay-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@utility relay-marquee {
+  animation: relay-marquee 26s linear infinite;
 }
