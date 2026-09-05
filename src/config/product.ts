@@ -18,6 +18,21 @@ export const demoConfig = {
     "Je voudrais faire borner mon terrain au 23 rue X à Waterloo avant de poser une clôture le mois prochain.",
 } as const;
 
+/**
+ * Identité légale : à compléter par l'entreprise.
+ * Tant qu'une valeur est nulle, les pages juridiques affichent un avertissement.
+ */
+export const legalEntity = {
+  companyName: null as string | null,
+  registrationNumber: null as string | null,
+  address: null as string | null,
+  contactEmail: null as string | null,
+  dataController: null as string | null,
+  retentionMonths: null as number | null,
+} as const;
+
+export const legalIsComplete = Object.values(legalEntity).every((value) => value !== null);
+
 export const appNav = [
   { to: "/app/inbox", label: "Inbox" },
   { to: "/app/experiences", label: "Expériences" },

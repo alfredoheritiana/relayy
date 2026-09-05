@@ -1,5 +1,6 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
 
+import { LegalNotice } from "@/components/relay/legal-notice";
 import { SiteFooter, SiteHeader } from "@/components/relay/site-header";
 import { product } from "@/config/product";
 
@@ -43,10 +44,7 @@ function TermsPage() {
             Les parcours en mode démonstration servent à l’évaluation du produit et ne créent pas
             d’engagement commercial.
           </p>
-          <p>
-            Le texte contractuel définitif reste à valider (voir{" "}
-            <code>docs/FACTS_TO_CONFIRM.md</code>).
-          </p>
+          <LegalNotice />
         </div>
         <Link to="/" className="mt-10 inline-block text-sm underline underline-offset-4">
           Retour à l’accueil

@@ -1,5 +1,6 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
 
+import { LegalNotice } from "@/components/relay/legal-notice";
 import { SiteFooter, SiteHeader } from "@/components/relay/site-header";
 import { product } from "@/config/product";
 
@@ -47,10 +48,7 @@ function PrivacyPage() {
             Les demandes en mode démonstration ne sont pas mélangées aux données réelles d’une
             organisation.
           </p>
-          <p>
-            Ce document décrit le comportement du produit. Le texte juridique définitif reste à
-            valider avec un conseil (voir <code>docs/FACTS_TO_CONFIRM.md</code>).
-          </p>
+          <LegalNotice />
         </div>
         <Link to="/" className="mt-10 inline-block text-sm underline underline-offset-4">
           Retour à l’accueil
