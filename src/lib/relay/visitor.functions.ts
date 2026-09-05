@@ -363,6 +363,7 @@ export const confirmVisitorSubmission = createServerFn({ method: "POST" })
       .insert({
         organization_id: session.organizationId,
         session_id: session.id,
+        experience_version_id: session.versionId,
         contact_name: read("contact_name"),
         email: read("email"),
         phone: read("phone"),

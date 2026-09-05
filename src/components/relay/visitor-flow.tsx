@@ -331,6 +331,11 @@ export function VisitorFlow({ slug, demoHint, onLeadCreated }: VisitorFlowProps)
         </div>
         <SummaryList lines={completion.lines} title="Ce qui a été transmis" />
         <p className="text-sm text-muted-foreground">{completion.summary}</p>
+        {state.isDemo ? (
+          <p className="text-sm font-medium text-foreground">
+            Simulation terminée — aucun lead réel n’a été envoyé
+          </p>
+        ) : null}
       </div>
     );
   }

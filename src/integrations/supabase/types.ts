@@ -439,6 +439,7 @@ export type Database = {
           contact_name: string | null
           created_at: string
           email: string | null
+          experience_version_id: string | null
           id: string
           intent: string | null
           missing_fields: string[]
@@ -457,6 +458,7 @@ export type Database = {
           contact_name?: string | null
           created_at?: string
           email?: string | null
+          experience_version_id?: string | null
           id?: string
           intent?: string | null
           missing_fields?: string[]
@@ -475,6 +477,7 @@ export type Database = {
           contact_name?: string | null
           created_at?: string
           email?: string | null
+          experience_version_id?: string | null
           id?: string
           intent?: string | null
           missing_fields?: string[]
@@ -488,6 +491,13 @@ export type Database = {
           updated_at?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "leads_experience_version_id_fkey"
+            columns: ["experience_version_id"]
+            isOneToOne: false
+            referencedRelation: "experience_versions"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "leads_organization_id_fkey"
             columns: ["organization_id"]
