@@ -1,10 +1,13 @@
 import { Link, useNavigate } from "@tanstack/react-router";
 import { useQueryClient } from "@tanstack/react-query";
+import { Search } from "lucide-react";
 import { useState, type ReactNode } from "react";
 
+import { CommandMenu } from "@/components/relay/command-menu";
 import { Button } from "@/components/ui/button";
 import { appNav, product } from "@/config/product";
 import { supabase } from "@/integrations/supabase/client";
+import { useCommandMenu } from "@/hooks/use-command-menu";
 import { cn } from "@/lib/utils";
 
 export interface AppShellProps {
@@ -45,6 +48,7 @@ export function AppShell({
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [menuOpen, setMenuOpen] = useState(false);
+  const { open: commandOpen, setOpen: setCommandOpen } = useCommandMenu();
 
   const signOut = async () => {
     await queryClient.cancelQueries();
@@ -95,8 +99,20 @@ export function AppShell({
 
   return (
     <div className="min-h-screen bg-paper lg:flex">
+      <CommandMenu open={commandOpen} onOpenChange={setCommandOpen} />
       <aside className="hidden w-[248px] shrink-0 flex-col bg-ink px-5 py-6 lg:flex">
         {sidebarBody}
+        <button
+          type="button"
+          onClick={() => setCommandOpen(true)}
+          className="mt-6 flex min-h-11 items-center justify-between rounded-lg border border-background/25 px-3 text-sm text-background/70 transition-colors hover:bg-background/10 hover:text-background"
+        >
+          <span className="flex items-center gap-2">
+            <Search className="size-4" aria-hidden="true" />
+            Rechercher
+          </span>
+          <span className="font-mono text-[10px] text-background/50">⌘K</span>
+        </button>
       </aside>
 
       <div className="border-b border-border bg-ink px-5 py-3 lg:hidden">
@@ -105,6 +121,14 @@ export function AppShell({
             <span className="size-2 rounded-full bg-signal" aria-hidden="true" />
             <span className="text-base font-semibold text-background">{product.name}</span>
           </Link>
+          <button
+            type="button"
+            onClick={() => setCommandOpen(true)}
+            className="ml-auto inline-flex size-11 items-center justify-center rounded-lg border border-background/25 text-background"
+          >
+            <span className="sr-only">Rechercher</span>
+            <Search className="size-4" aria-hidden="true" />
+          </button>
           <button
             type="button"
             aria-expanded={menuOpen}
