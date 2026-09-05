@@ -38,7 +38,11 @@ function Home() {
         <Button asChild size="lg">
           <Link to="/demo">Voir la démonstration</Link>
         </Button>
+        <Button asChild size="lg" variant="outline">
+          <Link to="/auth">Accéder à mon espace</Link>
+        </Button>
       </div>
+
 
       <section className="rounded-xl border border-border bg-card p-5">
         <h2 className="text-sm font-medium text-muted-foreground">Exemple</h2>
