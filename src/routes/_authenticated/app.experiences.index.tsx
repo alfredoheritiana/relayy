@@ -52,6 +52,11 @@ function ExperiencesPage() {
     <AppShell
       title="Expériences"
       description="Chaque parcours est versionné : les demandes gardent la version qui les a produites."
+      actions={
+        <Button asChild size="sm">
+          <Link to="/app/experiences/new">Nouvelle expérience</Link>
+        </Button>
+      }
     >
       {experiences.isLoading ? (
         <ul className="space-y-3" aria-busy="true">
