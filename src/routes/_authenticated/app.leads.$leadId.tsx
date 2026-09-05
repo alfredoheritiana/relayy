@@ -59,12 +59,31 @@ function LeadDetailPage() {
   });
 
   const mutation = useMutation({
-    mutationFn: (status: (typeof statuses)[number]) => setStatus({ data: { leadId, status } }),
-    onSuccess: () => {
+    mutationFn: (status: LeadStatus) => setStatus({ data: { leadId, status } }),
+    onMutate: async (status: LeadStatus) => {
+      await queryClient.cancelQueries({ queryKey: ["lead", leadId] });
+      const previous = queryClient.getQueryData<LeadDetailData>(["lead", leadId]);
+      if (previous?.lead) {
+        queryClient.setQueryData<LeadDetailData>(["lead", leadId], {
+          ...previous,
+          lead: { ...previous.lead, status },
+        });
+      }
+      return { previous };
+    },
+    onError: (_error, _status, ctx) => {
+      if (ctx?.previous) queryClient.setQueryData(["lead", leadId], ctx.previous);
+      toast.error("Le statut n’a pas pu être enregistré.");
+    },
+    onSuccess: (_result, status) => {
+      toast.success(`Statut mis à jour : ${leadStatusLabels[status] ?? status}`);
+    },
+    onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ["lead", leadId] });
       queryClient.invalidateQueries({ queryKey: ["leads"] });
     },
   });
+
 
   const data = detail.data;
 
