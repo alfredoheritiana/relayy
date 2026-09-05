@@ -195,7 +195,7 @@ export const submitVisitorAnswer = createServerFn({ method: "POST" })
       .maybeSingle();
     if (!versionRow) return null;
 
-    const definition = versionRow.definition as ExperienceDefinition;
+    const definition = versionRow.definition as unknown as ExperienceDefinition;
     const organization = (versionRow.experiences as { organizations?: { name: string; is_demo: boolean } } | null)
       ?.organizations;
 
@@ -326,8 +326,8 @@ export const confirmVisitorSubmission = createServerFn({ method: "POST" })
       .maybeSingle();
     if (!versionRow) return { error: "experience_introuvable" };
 
-    const definition = versionRow.definition as ExperienceDefinition;
-    const rules = versionRow.qualification_rules as Parameters<typeof qualify>[1];
+    const definition = versionRow.definition as unknown as ExperienceDefinition;
+    const rules = versionRow.qualification_rules as unknown as Parameters<typeof qualify>[1];
 
     const existing = await loadSessionValues(session);
     const corrections: SessionValue[] = data.corrections.flatMap((correction) => {
