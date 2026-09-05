@@ -181,7 +181,9 @@ function InboxPage() {
             <p className="text-base text-foreground">
               {search.trim()
                 ? "Aucune demande ne correspond à cette recherche."
-                : "Aucune demande pour ce filtre."}
+                : status === "all"
+                  ? "Aucune demande pour le moment."
+                  : "Aucune demande pour ce filtre."}
             </p>
             <p className="mt-2 text-sm text-muted-foreground">
               Partagez le lien de votre parcours pour commencer à recevoir des demandes structurées.

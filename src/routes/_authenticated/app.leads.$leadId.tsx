@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useState } from "react";
+import { toast } from "sonner";
 
 import { AppShell } from "@/components/relay/app-shell";
 import { SignalPath } from "@/components/relay/signal-path";
@@ -26,6 +27,8 @@ export const Route = createFileRoute("/_authenticated/app/leads/$leadId")({
 });
 
 const statuses = ["new", "to_contact", "qualified", "not_a_fit", "done"] as const;
+type LeadStatus = (typeof statuses)[number];
+type LeadDetailData = Awaited<ReturnType<typeof getLeadDetail>>;
 
 const FIELD_LABELS: Record<string, string> = {
   service: "Projet",
@@ -59,8 +62,28 @@ function LeadDetailPage() {
   });
 
   const mutation = useMutation({
-    mutationFn: (status: (typeof statuses)[number]) => setStatus({ data: { leadId, status } }),
-    onSuccess: () => {
+    mutationFn: (status: LeadStatus) => setStatus({ data: { leadId, status } }),
+    onMutate: async (status: LeadStatus) => {
+      await queryClient.cancelQueries({ queryKey: ["lead", leadId] });
+      const previous = queryClient.getQueryData<LeadDetailData>(["lead", leadId]);
+      if (previous?.lead) {
+        const next: LeadDetailData = {
+          ...previous,
+          lead: { ...previous.lead, status },
+        };
+        queryClient.setQueryData(["lead", leadId], next);
+      }
+
+      return { previous };
+    },
+    onError: (_error, _status, ctx) => {
+      if (ctx?.previous) queryClient.setQueryData(["lead", leadId], ctx.previous);
+      toast.error("Le statut n’a pas pu être enregistré.");
+    },
+    onSuccess: (_result, status) => {
+      toast.success(`Statut mis à jour : ${leadStatusLabels[status] ?? status}`);
+    },
+    onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ["lead", leadId] });
       queryClient.invalidateQueries({ queryKey: ["leads"] });
     },
@@ -100,7 +123,15 @@ function LeadDetailPage() {
           </Button>
         </div>
       ) : !data ? (
-        <p className="text-sm text-muted-foreground">Demande introuvable.</p>
+        <div className="rounded-2xl border border-dashed border-border p-10 text-center">
+          <p className="text-base text-foreground">Demande introuvable ou accès refusé.</p>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Cette demande n’existe pas ou n’appartient pas à votre organisation.
+          </p>
+          <Button asChild size="sm" className="mt-5">
+            <Link to="/app/inbox">Retour à l’inbox</Link>
+          </Button>
+        </div>
       ) : (
         <div className="grid gap-6 lg:grid-cols-12">
           <div className="space-y-6 lg:col-span-8">
