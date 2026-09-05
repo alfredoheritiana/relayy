@@ -1,7 +1,9 @@
 import { Link, useNavigate } from "@tanstack/react-router";
 import { useQueryClient } from "@tanstack/react-query";
+import { Search } from "lucide-react";
 import { useState, type ReactNode } from "react";
 
+import { CommandMenu, useCommandMenu } from "@/components/relay/command-menu";
 import { Button } from "@/components/ui/button";
 import { appNav, product } from "@/config/product";
 import { supabase } from "@/integrations/supabase/client";
