@@ -160,7 +160,7 @@ function Home() {
               <SectionLabel tone="dark">// RELAY · ADAPTIVE INTAKE</SectionLabel>
               <h1 className="relay-h1 mt-6">
                 <span className="block">Les humains</span>
-                <span className="relay-voice block text-relay-red">expliquent.</span>
+                <span className="relay-voice block text-relay-red font-bold">expliquent.</span>
                 <span className="block">Relay structure.</span>
               </h1>
               <p className="mt-8 max-w-xl text-[1.0625rem] leading-relaxed text-relay-muted-dark sm:text-lg">
