@@ -154,35 +154,52 @@ function Home() {
 
       <main>
         {/* HERO */}
-        <section className="bg-relay-black pb-20 pt-10 text-relay-white lg:pb-28 lg:pt-16">
-          <div className="relay-container grid gap-12 lg:grid-cols-12 lg:gap-14">
+        <section className="relative overflow-hidden bg-relay-black pb-24 pt-12 text-relay-white lg:pb-36 lg:pt-20">
+          {/* Halo rouge, signature visuelle Relay */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -right-40 -top-40 size-[34rem] rounded-full bg-relay-red/35 blur-[120px] motion-safe:animate-fade-in"
+          />
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -bottom-32 -left-24 size-[24rem] rounded-full bg-relay-blue/20 blur-[100px]"
+          />
+          <div className="relay-container relative grid gap-12 lg:grid-cols-12 lg:gap-14">
             <div className="lg:col-span-6">
               <SectionLabel tone="dark">// RELAY · ADAPTIVE INTAKE</SectionLabel>
-              <h1 className="relay-h1 mt-6">
+              <h1 className="relay-h1 mt-7">
                 <span className="block">Les humains</span>
-                <span className="relay-voice block text-relay-red" style={{ fontWeight: 700 }}>
+                <span
+                  className="relay-voice block text-relay-red"
+                  style={{ fontWeight: 700 }}
+                >
                   expliquent.
                 </span>
                 <span className="block">Relay structure.</span>
               </h1>
               <p className="mt-8 max-w-xl text-[1.0625rem] leading-relaxed text-relay-muted-dark sm:text-lg">
-                Une personne décrit ce dont elle a besoin. Relay comprend ce qui est déjà dit, pose
-                uniquement la question qui manque et transmet une demande prête à traiter.
+                Pas de formulaire. Pas de liste déroulante. Une phrase suffit&nbsp;: Relay en
+                extrait le service, le lieu, l’objectif et le délai, ne demande que ce qui manque,
+                et livre une demande qualifiée — pas un transcript à décoder.
               </p>
-              <div className="mt-10 flex flex-wrap items-center gap-5">
+              <div className="mt-10 flex flex-col gap-5 sm:flex-row sm:items-center">
+                <Link
+                  to="/e/$slug"
+                  params={{ slug: "geolia-demo" }}
+                  className="inline-flex min-h-12 items-center justify-center rounded-lg bg-relay-red px-7 font-display text-base font-semibold text-relay-white transition-colors hover:bg-relay-red-dark"
+                >
+                  Commencer le parcours visiteur →
+                </Link>
                 <a
                   href="#live-trace"
-                  className="inline-flex min-h-12 items-center rounded-lg bg-relay-red px-6 font-display text-base font-semibold text-relay-white transition-colors hover:bg-relay-red-dark"
+                  className="inline-flex min-h-12 items-center justify-center font-display text-base font-semibold text-relay-white underline underline-offset-8 hover:text-relay-muted-dark"
                 >
                   Voir Relay comprendre
                 </a>
-                <a
-                  href="#product"
-                  className="inline-flex min-h-12 items-center font-display text-base font-semibold text-relay-white underline underline-offset-8 hover:text-relay-muted-dark"
-                >
-                  Explorer le produit ↘
-                </a>
               </div>
+              <p className="mt-6 font-mono text-[11px] uppercase tracking-[0.16em] text-relay-muted-dark">
+                Aucun compte requis · Démonstration GeoLia
+              </p>
             </div>
 
             <div className="lg:col-span-6">
