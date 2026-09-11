@@ -371,7 +371,10 @@ export const confirmVisitorSubmission = createServerFn({ method: "POST" })
         summary,
         intent: buildIntent(definition, values),
         overall_score: result.overallScore,
-        completeness_score: Math.max(0, Math.min(100, Math.round(result.completeness))),
+        completeness_score: Math.max(
+          0,
+          Math.min(100, Math.round(result.completeness * 100)),
+        ),
         recommended_action: result.recommendedAction,
         missing_fields: [...result.missingFields],
         status: "new",

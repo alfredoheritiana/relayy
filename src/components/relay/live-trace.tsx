@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import { RelayTrace } from "@/components/relay/relay-trace";
 import { Button } from "@/components/ui/button";
@@ -75,6 +75,18 @@ export interface LiveRelayTraceProps {
 export function LiveRelayTrace({ tone = "dark", className }: LiveRelayTraceProps) {
   const [text, setText] = useState<string>(demoConfig.referenceSentence);
   const [analyzedText, setAnalyzedText] = useState<string | null>(null);
+  const [analyzing, setAnalyzing] = useState(false);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  useEffect(() => {
+    if (!analyzing) return;
+    const timer = window.setTimeout(() => {
+      setAnalyzedText(text.trim());
+      setAnalyzing(false);
+    }, 560);
+
+    return () => window.clearTimeout(timer);
+  }, [analyzing, text]);
 
   const facts = useMemo<Fact[]>(() => {
     if (analyzedText === null) return [];
@@ -86,7 +98,7 @@ export function LiveRelayTrace({ tone = "dark", className }: LiveRelayTraceProps
     }));
   }, [analyzedText]);
 
-  const analyzed = analyzedText !== null;
+  const analyzed = analyzedText !== null && !analyzing;
   const dark = tone === "dark";
   const parts = analyzed ? highlight(analyzedText, facts) : [{ text, key: null }];
   const step = !analyzed ? 0 : facts.length === 0 ? 1 : facts.length >= 3 ? 3 : 2;
@@ -123,13 +135,22 @@ export function LiveRelayTrace({ tone = "dark", className }: LiveRelayTraceProps
           Phrase à analyser
         </label>
         <Textarea
+          ref={textareaRef}
           id="live-trace-input"
           value={text}
           rows={5}
           maxLength={500}
+          aria-describedby="live-trace-help live-trace-count"
+          onKeyDown={(event) => {
+            if ((event.metaKey || event.ctrlKey) && event.key === "Enter") {
+              event.preventDefault();
+              if (text.trim() && !analyzing) setAnalyzing(true);
+            }
+          }}
           onChange={(event) => {
             setText(event.target.value);
             setAnalyzedText(null);
+            setAnalyzing(false);
           }}
           className={cn(
             "relay-voice min-h-48 resize-none rounded-lg text-[1.65rem] leading-[1.12] sm:min-h-56 sm:text-[2.15rem]",
@@ -139,19 +160,25 @@ export function LiveRelayTrace({ tone = "dark", className }: LiveRelayTraceProps
           )}
         />
         <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
-          <span className={cn("font-mono text-[11px]", dark ? "text-relay-muted-dark" : "text-muted-foreground")}>
+          <span
+            id="live-trace-count"
+            className={cn(
+              "font-mono text-[11px]",
+              dark ? "text-relay-muted-dark" : "text-muted-foreground",
+            )}
+          >
             {text.length}/500
           </span>
           <Button
             type="button"
-            onClick={() => setAnalyzedText(text.trim())}
-            disabled={!text.trim()}
+            onClick={() => setAnalyzing(true)}
+            disabled={!text.trim() || analyzing}
+            aria-busy={analyzing}
           >
-            Analyser la demande
+            {analyzing ? "Structuration en cours…" : analyzed ? "Analyser de nouveau" : "Analyser la demande"}
           </Button>
-          <RelayTrace current={analyzed ? step : 0} tone={dark ? "dark" : "light"} />
 
-      {analyzed ? (
+          {analyzed ? (
             <button
               type="button"
               onClick={() => {
@@ -169,6 +196,14 @@ export function LiveRelayTrace({ tone = "dark", className }: LiveRelayTraceProps
             </button>
           ) : null}
         </div>
+      </div>
+
+      <div id="live-trace-help" className="sr-only" aria-live="polite">
+        {analyzing
+          ? "Structuration de la demande"
+          : analyzed
+            ? `${facts.length} fait${facts.length > 1 ? "s" : ""} compris`
+            : "Relay distinguera ce qui est déjà dit de ce qu’il faut encore demander."}
       </div>
 
       {analyzed ? (
@@ -221,8 +256,6 @@ export function LiveRelayTrace({ tone = "dark", className }: LiveRelayTraceProps
             </p>
           )}
 
-          <RelayTrace current={step} tone={dark ? "dark" : "light"} />
-
           <div
             className={cn(
               "flex flex-col gap-1 border-l-2 pl-4",
@@ -259,6 +292,18 @@ export function LiveRelayTrace({ tone = "dark", className }: LiveRelayTraceProps
           Relay distinguera ce qui est déjà dit de ce qu’il faut encore demander.
         </p>
       )}
+
+      <RelayTrace
+        current={analyzed ? step : analyzing ? 1 : 0}
+        tone={dark ? "dark" : "light"}
+        liveLabel={
+          analyzing
+            ? "Structuration de la demande"
+            : analyzed
+              ? `${facts.length} faits compris`
+              : "En attente d’une demande à analyser"
+        }
+      />
     </div>
   );
 }
