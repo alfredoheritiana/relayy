@@ -173,10 +173,6 @@ FILE: src/routes/index.tsx
                 // 01 · INTENT → ACTION
               </p>
               <h1 className="mt-5 max-w-[480px] font-display text-[clamp(3.6rem,5.25vw,5.9rem)] font-extrabold leading-[.91] tracking-[-.055em]">
-          <div className="relay-container relative grid items-start gap-10 lg:grid-cols-12 lg:gap-12 xl:gap-14">
-            <div className="relative lg:col-span-5 lg:pt-1">
-              <SectionLabel tone="dark">// RELAY · ADAPTIVE INTAKE</SectionLabel>
-              <h1 className="mt-5 max-w-[680px] font-display text-[clamp(3.35rem,6.15vw,7.25rem)] font-extrabold leading-[.9] tracking-[-.055em]">
                 <span className="block whitespace-nowrap">Les humains</span>
                 <span className="relay-voice block whitespace-nowrap font-normal tracking-[-.035em] text-relay-red">
                   expliquent.
