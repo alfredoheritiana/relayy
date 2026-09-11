@@ -94,7 +94,7 @@ export function LiveRelayTrace({ tone = "dark", className }: LiveRelayTraceProps
   return (
     <div
       className={cn(
-        "flex flex-col gap-6 border p-5 sm:p-7",
+        "flex flex-col gap-6 border border-relay-line-dark/80 p-5 sm:p-7 lg:p-8",
         dark
           ? "border-relay-line-dark bg-relay-ink text-relay-white"
           : "border-border bg-surface text-foreground",
@@ -103,7 +103,8 @@ export function LiveRelayTrace({ tone = "dark", className }: LiveRelayTraceProps
     >
       <div className="flex flex-wrap items-center justify-between gap-2">
         <p className={cn("relay-label", dark ? "text-relay-muted-dark" : "text-muted-foreground")}>
-          Live relay trace
+          <span className="mr-2 inline-block size-2 rounded-full bg-relay-red align-middle" />
+          // LIVE RELAY TRACE
         </p>
         <span
           className={cn(
@@ -124,27 +125,33 @@ export function LiveRelayTrace({ tone = "dark", className }: LiveRelayTraceProps
         <Textarea
           id="live-trace-input"
           value={text}
-          rows={3}
+          rows={5}
+          maxLength={500}
           onChange={(event) => {
             setText(event.target.value);
             setAnalyzedText(null);
           }}
           className={cn(
-            "relay-voice min-h-28 resize-none rounded-lg text-2xl leading-snug sm:text-3xl",
+            "relay-voice min-h-48 resize-none rounded-lg text-[1.65rem] leading-[1.12] sm:min-h-56 sm:text-[2.15rem]",
             dark
               ? "border-relay-line-dark bg-relay-black text-relay-white placeholder:text-relay-muted-dark"
               : "bg-surface",
           )}
         />
-        <div className="mt-3 flex flex-wrap items-center gap-3">
+        <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
+          <span className={cn("font-mono text-[11px]", dark ? "text-relay-muted-dark" : "text-muted-foreground")}>
+            {text.length}/500
+          </span>
           <Button
             type="button"
             onClick={() => setAnalyzedText(text.trim())}
             disabled={!text.trim()}
           >
-            Analyser la phrase
+            Analyser la demande
           </Button>
-          {analyzed ? (
+          <RelayTrace current={analyzed ? step : 0} tone={dark ? "dark" : "light"} />
+
+      {analyzed ? (
             <button
               type="button"
               onClick={() => {
@@ -249,7 +256,7 @@ export function LiveRelayTrace({ tone = "dark", className }: LiveRelayTraceProps
         </div>
       ) : (
         <p className={cn("text-sm", dark ? "text-relay-muted-dark" : "text-muted-foreground")}>
-          Modifiez la phrase si vous le souhaitez, puis lancez l’analyse locale.
+          Relay distinguera ce qui est déjà dit de ce qu’il faut encore demander.
         </p>
       )}
     </div>

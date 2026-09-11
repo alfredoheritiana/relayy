@@ -1,14 +1,15 @@
-import { Link } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { Link, useNavigate } from "@tanstack/react-router";
+import { ArrowRight, Menu, X } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
 import { product } from "@/config/product";
 import { cn } from "@/lib/utils";
 
 const links = [
-  { href: "/#product", label: "Produit", index: "01" },
-  { href: "/#live-trace", label: "Démonstration", index: "02" },
-  { href: "/#pour-qui", label: "Pour qui", index: "03" },
-];
+  { to: "/", hash: "product", label: "Produit", index: "01" },
+  { to: "/demo", label: "Démonstration", index: "02" },
+  { to: "/", hash: "for-who", label: "Pour qui", index: "03" },
+] as const;
 
 export function RelayWordmark({ tone = "light" }: { tone?: "light" | "dark" }) {
   return (
@@ -27,8 +28,10 @@ export function RelayWordmark({ tone = "light" }: { tone?: "light" | "dark" }) {
 }
 
 export function SiteHeader() {
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -38,62 +41,103 @@ export function SiteHeader() {
   }, []);
 
   useEffect(() => {
-    if (!open) return;
+    if (!open) {
+      document.body.style.overflow = "";
+      return;
+    }
+
     const onKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setOpen(false);
+      if (event.key === "Escape") {
+        setOpen(false);
+        menuButtonRef.current?.focus();
+      }
     };
+
+    document.body.style.overflow = "hidden";
     window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
+    };
   }, [open]);
+
+  const closeMenu = () => {
+    setOpen(false);
+    menuButtonRef.current?.focus();
+  };
 
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 transition-colors duration-200",
-        scrolled || open ? "bg-relay-black" : "bg-transparent",
+        "sticky top-0 z-50 border-b transition-colors duration-200",
+        scrolled || open
+          ? "border-relay-line-dark bg-relay-black/95"
+          : "border-relay-white/10 bg-relay-black/85",
       )}
     >
-      <div className="relay-container flex items-center justify-between gap-4 py-4">
-        <Link to="/" aria-label={`${product.name} — accueil`}>
+      <div className="relay-container grid min-h-16 grid-cols-[1fr_auto] items-center gap-4 py-2.5 lg:min-h-[74px] lg:grid-cols-12">
+        <Link
+          to="/"
+          aria-label="Relay — accueil"
+          className="group inline-flex min-h-11 items-center lg:col-span-3"
+        >
           <RelayWordmark tone="dark" />
         </Link>
 
-        <nav aria-label="Navigation principale" className="hidden items-center gap-8 md:flex">
+        <nav
+          aria-label="Navigation principale"
+          className="hidden items-center justify-center gap-8 lg:col-span-6 lg:flex"
+        >
           {links.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="font-display text-sm font-semibold text-relay-muted-dark transition-colors hover:text-relay-white"
+            <Link
+              key={link.label}
+              to={link.to}
+              {...("hash" in link ? { hash: link.hash } : {})}
+              className="group relative min-h-11 items-center pt-3 font-sans text-sm font-semibold text-relay-muted-dark transition-colors hover:text-relay-white"
             >
-              {link.label}
-            </a>
+              <span>{link.label}</span>
+              <span
+                aria-hidden="true"
+                className="absolute left-0 top-0 h-0.5 w-0 bg-relay-red transition-[width] duration-200 group-hover:w-5"
+              />
+            </Link>
           ))}
-          <Link
-            to="/auth"
-            className="font-display text-sm font-semibold text-relay-muted-dark transition-colors hover:text-relay-white"
-          >
-            Se connecter
-          </Link>
-          <Link
-            to="/e/$slug"
-            params={{ slug: "geolia-demo" }}
-            className="inline-flex min-h-11 items-center rounded-lg bg-relay-red px-5 font-display text-sm font-semibold text-relay-white transition-colors hover:bg-relay-red-dark"
-          >
-            Tester Relay
-          </Link>
+          <div className="flex items-center justify-end gap-5 lg:col-span-3">
+            <Link
+              to="/auth"
+              search={{ next: "/app" }}
+              className="hidden min-h-11 items-center font-sans text-sm font-semibold text-relay-muted-dark transition-colors hover:text-relay-white sm:inline-flex"
+            >
+              Se connecter
+            </Link>
+            <Link
+              to="/e/$slug"
+              params={{ slug: "geolia-demo" }}
+              className="group inline-flex min-h-11 items-center gap-3 rounded-[10px] bg-relay-red px-5 font-display text-sm font-semibold text-relay-white transition-colors hover:bg-relay-red-dark active:scale-[.985]"
+            >
+              Tester Relay
+              <ArrowRight
+                className="size-4 transition-transform duration-200 group-hover:translate-x-0.5"
+                aria-hidden="true"
+              />
+            </Link>
+          </div>
         </nav>
 
         <button
+          ref={menuButtonRef}
           type="button"
-          className="inline-flex size-11 items-center justify-center rounded-lg border border-relay-line-dark text-relay-white md:hidden"
+          className="inline-flex size-11 items-center justify-center rounded-lg border border-relay-line-dark text-relay-white lg:hidden"
           aria-expanded={open}
           aria-controls="menu-mobile"
           onClick={() => setOpen((value) => !value)}
         >
           <span className="sr-only">{open ? "Fermer le menu" : "Ouvrir le menu"}</span>
-          <span aria-hidden="true" className="text-lg">
-            {open ? "×" : "≡"}
-          </span>
+          {open ? (
+            <X className="size-5" aria-hidden="true" />
+          ) : (
+            <Menu className="size-5" aria-hidden="true" />
+          )}
         </button>
       </div>
 
@@ -104,10 +148,11 @@ export function SiteHeader() {
         >
           <nav aria-label="Navigation mobile" className="flex flex-col">
             {links.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={() => setOpen(false)}
+              <Link
+                key={link.label}
+                to={link.to}
+                {...("hash" in link ? { hash: link.hash } : {})}
+                onClick={closeMenu}
                 className="flex min-h-14 items-baseline gap-4 border-b border-relay-line-dark py-3"
               >
                 <span className="relay-label text-relay-muted-dark">{link.index}</span>
@@ -118,7 +163,7 @@ export function SiteHeader() {
             ))}
             <Link
               to="/auth"
-              onClick={() => setOpen(false)}
+              onClick={closeMenu}
               className="flex min-h-14 items-baseline gap-4 border-b border-relay-line-dark py-3"
             >
               <span className="relay-label text-relay-muted-dark">04</span>

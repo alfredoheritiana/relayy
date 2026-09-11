@@ -154,7 +154,7 @@ function Home() {
 
       <main>
         {/* HERO */}
-        <section className="relative overflow-hidden bg-relay-black pb-12 pt-6 text-relay-white sm:pb-24 sm:pt-12 lg:pb-36 lg:pt-20">
+        <section className="relative overflow-hidden bg-relay-black pb-14 pt-8 text-relay-white sm:pb-20 sm:pt-12 lg:min-h-[calc(100svh-74px)] lg:pb-16 lg:pt-16">
           {/* Halo rouge, signature visuelle Relay */}
           <div
             aria-hidden="true"
@@ -164,31 +164,27 @@ function Home() {
             aria-hidden="true"
             className="pointer-events-none absolute -bottom-32 -left-24 size-[24rem] rounded-full bg-relay-blue/20 blur-[100px]"
           />
-          <div className="relay-container relative grid gap-12 lg:grid-cols-12 lg:gap-14">
-            <div className="lg:col-span-6">
+          <div className="relay-container relative grid items-start gap-10 lg:grid-cols-12 lg:gap-12 xl:gap-14">
+            <div className="relative lg:col-span-5 lg:pt-1">
               <SectionLabel tone="dark">// RELAY · ADAPTIVE INTAKE</SectionLabel>
-              <h1 className="relay-h1 mt-6 sm:mt-7">
-                <span className="block">Les humains</span>
-                <span
-                  className="relay-voice block text-relay-red"
-                  style={{ fontWeight: 700 }}
-                >
+              <h1 className="mt-5 max-w-[680px] font-display text-[clamp(3.35rem,6.15vw,7.25rem)] font-extrabold leading-[.9] tracking-[-.055em]">
+                <span className="block whitespace-nowrap">Les humains</span>
+                <span className="relay-voice block whitespace-nowrap font-normal tracking-[-.035em] text-relay-red">
                   expliquent.
                 </span>
-                <span className="block">Relay structure.</span>
+                <span className="block whitespace-nowrap">Relay structure.</span>
               </h1>
-              <p className="mt-6 max-w-xl text-[1.0625rem] leading-relaxed text-relay-muted-dark sm:mt-8 sm:text-lg">
-                Pas de formulaire. Pas de liste déroulante. Une phrase suffit&nbsp;: Relay en
-                extrait le service, le lieu, l’objectif et le délai, ne demande que ce qui manque,
-                et livre une demande qualifiée — pas un transcript à décoder.
+              <p className="mt-8 max-w-[560px] text-base leading-relaxed text-relay-muted-dark sm:text-lg">
+                Une personne décrit ce dont elle a besoin. Relay comprend ce qui est déjà dit, pose
+                uniquement la question qui manque et transmet une demande prête à traiter.
               </p>
-              <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:items-center sm:gap-5">
+              <div className="mt-8 flex flex-col gap-3 sm:mt-9 sm:flex-row sm:items-center sm:gap-4">
                 <Link
                   to="/e/$slug"
                   params={{ slug: "geolia-demo" }}
-                  className="inline-flex min-h-12 w-full items-center justify-center rounded-lg bg-relay-red px-5 font-display text-base font-semibold text-relay-white transition-colors hover:bg-relay-red-dark sm:w-auto sm:px-7"
+                  className="inline-flex min-h-12 w-full items-center justify-center rounded-lg bg-relay-red px-5 font-display text-base font-semibold text-relay-white transition-colors hover:bg-relay-red-dark sm:w-auto sm:px-6"
                 >
-                  Commencer le parcours visiteur →
+                  Essayer une demande
                 </Link>
                 <a
                   href="#live-trace"
@@ -197,13 +193,13 @@ function Home() {
                   Voir Relay comprendre
                 </a>
               </div>
-              <p className="mt-6 font-mono text-[11px] uppercase tracking-[0.16em] text-relay-muted-dark">
-                Aucun compte requis · Démonstration GeoLia
+              <p className="mt-6 font-mono text-[11px] uppercase tracking-[0.12em] text-relay-muted-dark">
+                4 faits compris · 0 question répétée · 1 prochaine action
               </p>
             </div>
 
-            <div className="lg:col-span-6">
-              <LiveRelayTrace tone="dark" className="rounded-2xl" />
+            <div className="lg:col-span-7">
+              <LiveRelayTrace tone="dark" className="rounded-[24px]" />
             </div>
           </div>
         </section>
@@ -490,7 +486,7 @@ function Home() {
         </section>
 
         {/* POUR QUI */}
-        <section id="pour-qui" className="bg-relay-blue py-20 text-relay-black lg:py-32">
+        <section id="for-who" className="scroll-mt-20 bg-relay-blue py-20 text-relay-black lg:scroll-mt-24 lg:py-32">
           <div className="relay-container">
             <SectionLabel>// 05 · POUR QUI</SectionLabel>
             <h2 className="relay-h2 mt-6 max-w-4xl">
