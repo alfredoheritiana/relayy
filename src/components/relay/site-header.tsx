@@ -89,9 +89,12 @@ export function SiteHeader() {
         <Link
           to="/"
           aria-label="Relay — accueil"
-          className="group inline-flex min-h-11 items-center lg:col-span-3"
+          className="group inline-flex min-h-11 items-center gap-4 lg:col-span-3"
         >
           <RelayWordmark tone="dark" />
+          <span className="border-l border-relay-line-dark pl-4 font-mono text-sm font-bold tracking-[0.18em] text-relay-white">
+            LOVABLE
+          </span>
         </Link>
 
         <nav
