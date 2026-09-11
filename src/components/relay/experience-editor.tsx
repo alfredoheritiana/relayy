@@ -169,14 +169,14 @@ export function ExperienceEditor({
   const currentStep = steps[stepIndex]?.key ?? "identite";
 
   return (
-    <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_320px]">
+    <div className="grid gap-4 sm:gap-6 lg:grid-cols-[minmax(0,1fr)_320px]">
       <div className="space-y-6">
         <SignalPath
           nodes={nodes}
           liveLabel={`Étape ${stepIndex + 1} sur ${steps.length} : ${steps[stepIndex]?.label ?? ""}`}
         />
 
-        <div className="space-y-5 rounded-2xl border border-border bg-surface p-5 sm:p-6">
+        <div className="space-y-5 rounded-2xl border border-border bg-surface p-4 sm:p-6">
           {currentStep === "identite" ? (
             <div className="space-y-4">
               <div className="space-y-2">
@@ -330,7 +330,7 @@ export function ExperienceEditor({
         </div>
       </div>
 
-      <aside className="space-y-3 rounded-2xl border border-border bg-card p-5">
+      <aside className="space-y-3 rounded-2xl border border-border bg-card p-4 sm:p-5">
         <div className="flex items-center justify-between">
           <h2 className="text-sm font-semibold text-foreground">Aperçu des questions</h2>
           <Badge variant="secondary">{preview.questions.length}</Badge>

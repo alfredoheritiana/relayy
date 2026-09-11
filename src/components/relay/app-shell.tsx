@@ -115,7 +115,7 @@ export function AppShell({
         </button>
       </aside>
 
-      <div className="border-b border-border bg-ink px-5 py-3 lg:hidden">
+      <div className="border-b border-border bg-ink px-4 py-3 sm:px-5 lg:hidden">
         <div className="flex items-center justify-between gap-3">
           <Link to="/" className="flex items-center gap-2">
             <span className="size-2 rounded-full bg-signal" aria-hidden="true" />
@@ -147,8 +147,8 @@ export function AppShell({
         ) : null}
       </div>
 
-      <main className="min-w-0 flex-1 px-5 py-8 lg:px-10">
-        <div className="mb-8 flex flex-wrap items-end justify-between gap-3">
+      <main className="min-w-0 flex-1 px-4 py-6 sm:px-5 sm:py-8 lg:px-10">
+        <div className="mb-6 flex flex-wrap items-end justify-between gap-3 sm:mb-8">
           <div className="min-w-0">
             {organizationName ? (
               <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">

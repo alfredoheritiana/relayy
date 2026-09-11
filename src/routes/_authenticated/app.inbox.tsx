@@ -167,7 +167,7 @@ function InboxPage() {
               aria-current={active ? "true" : undefined}
               onClick={() => openLead(lead.id)}
               className={cn(
-                "relay-card block w-full rounded-2xl border bg-surface p-5 text-left transition-colors",
+                "relay-card block w-full rounded-2xl border bg-surface p-4 text-left transition-colors sm:p-5",
                 active ? "border-primary" : "border-border hover:border-primary/40",
               )}
             >
@@ -233,7 +233,7 @@ function InboxPage() {
         </p>
       ) : null}
 
-      <div className="relay-card rounded-2xl border border-border bg-surface p-4">
+      <div className="relay-card rounded-2xl border border-border bg-surface p-4 sm:p-5">
         <div className="grid gap-4 sm:grid-cols-2">
           <div className="space-y-2">
             <Label htmlFor="search">Rechercher</Label>

@@ -154,7 +154,7 @@ function Home() {
 
       <main>
         {/* HERO */}
-        <section className="relative overflow-hidden bg-relay-black pb-24 pt-12 text-relay-white lg:pb-36 lg:pt-20">
+        <section className="relative overflow-hidden bg-relay-black pb-16 pt-8 text-relay-white sm:pb-24 sm:pt-12 lg:pb-36 lg:pt-20">
           {/* Halo rouge, signature visuelle Relay */}
           <div
             aria-hidden="true"
@@ -167,7 +167,7 @@ function Home() {
           <div className="relay-container relative grid gap-12 lg:grid-cols-12 lg:gap-14">
             <div className="lg:col-span-6">
               <SectionLabel tone="dark">// RELAY · ADAPTIVE INTAKE</SectionLabel>
-              <h1 className="relay-h1 mt-7">
+              <h1 className="relay-h1 mt-6 sm:mt-7">
                 <span className="block">Les humains</span>
                 <span
                   className="relay-voice block text-relay-red"
@@ -177,12 +177,12 @@ function Home() {
                 </span>
                 <span className="block">Relay structure.</span>
               </h1>
-              <p className="mt-8 max-w-xl text-[1.0625rem] leading-relaxed text-relay-muted-dark sm:text-lg">
+              <p className="mt-6 max-w-xl text-[1.0625rem] leading-relaxed text-relay-muted-dark sm:mt-8 sm:text-lg">
                 Pas de formulaire. Pas de liste déroulante. Une phrase suffit&nbsp;: Relay en
                 extrait le service, le lieu, l’objectif et le délai, ne demande que ce qui manque,
                 et livre une demande qualifiée — pas un transcript à décoder.
               </p>
-              <div className="mt-10 flex flex-col gap-5 sm:flex-row sm:items-center">
+              <div className="mt-8 flex flex-col gap-4 sm:mt-10 sm:flex-row sm:items-center sm:gap-5">
                 <Link
                   to="/e/$slug"
                   params={{ slug: "geolia-demo" }}

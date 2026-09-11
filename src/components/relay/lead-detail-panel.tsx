@@ -132,7 +132,7 @@ export function LeadDetailPanel({ leadId, variant = "page", className }: LeadDet
   return (
     <div className={cn("grid gap-6", split ? "grid-cols-1" : "lg:grid-cols-12", className)}>
       <div className={cn("space-y-6", split ? "" : "lg:col-span-8")}>
-        <section className="rounded-2xl border border-border bg-ink p-6 text-background">
+        <section className="rounded-2xl border border-border bg-ink p-4 text-background sm:p-6">
           <div className="flex flex-wrap items-center gap-3">
             <motion.span layoutId={`lead-status-${leadId}`}>
               <Badge className="bg-signal text-signal-foreground">
@@ -169,7 +169,7 @@ export function LeadDetailPanel({ leadId, variant = "page", className }: LeadDet
           </div>
         </section>
 
-        <section className="rounded-2xl border border-border bg-surface p-6">
+        <section className="rounded-2xl border border-border bg-surface p-4 sm:p-6">
           <motion.h2
             layoutId={`lead-title-${leadId}`}
             className="text-xl font-medium text-foreground"
@@ -207,7 +207,7 @@ export function LeadDetailPanel({ leadId, variant = "page", className }: LeadDet
           </div>
         </section>
 
-        <section className="rounded-2xl border border-border bg-surface p-6">
+        <section className="rounded-2xl border border-border bg-surface p-4 sm:p-6">
           <h3 className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
             Ce que cette personne veut
           </h3>
@@ -247,7 +247,7 @@ export function LeadDetailPanel({ leadId, variant = "page", className }: LeadDet
             aria-expanded={transcriptOpen}
             aria-controls={`transcript-${leadId}`}
             onClick={() => setTranscriptOpen((value) => !value)}
-            className="flex min-h-11 w-full items-center justify-between px-6 py-4 text-left text-sm font-medium text-foreground"
+            className="flex min-h-11 w-full items-center justify-between px-4 py-4 text-left text-sm font-medium text-foreground sm:px-6"
           >
             Voir la conversation complète
             <span aria-hidden="true">{transcriptOpen ? "−" : "+"}</span>
@@ -255,7 +255,7 @@ export function LeadDetailPanel({ leadId, variant = "page", className }: LeadDet
           {transcriptOpen ? (
             <ol
               id={`transcript-${leadId}`}
-              className="space-y-4 border-t border-border px-6 py-5 text-sm"
+              className="space-y-4 border-t border-border px-4 py-5 text-sm sm:px-6"
             >
               {data.messages.map((message, index) => (
                 <li key={`${message.createdAt}-${index}`}>
@@ -271,7 +271,7 @@ export function LeadDetailPanel({ leadId, variant = "page", className }: LeadDet
       </div>
 
       <aside className={split ? "" : "lg:col-span-4"}>
-        <div className="rounded-2xl border border-border bg-surface p-6">
+        <div className="rounded-2xl border border-border bg-surface p-4 sm:p-6">
           <h3 className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
             Score global
           </h3>
