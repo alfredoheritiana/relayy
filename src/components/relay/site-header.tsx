@@ -92,7 +92,7 @@ export function SiteHeader() {
           className="group inline-flex min-h-11 items-center gap-4 lg:col-span-3"
         >
           <RelayWordmark tone="dark" />
-          <span className="border-l border-relay-line-dark pl-4 font-mono text-sm font-bold tracking-[0.18em] text-relay-white">
+          <span className="inline-flex min-h-8 items-center border border-relay-white/40 bg-relay-white px-3 font-mono text-xs font-bold tracking-[0.2em] text-relay-black transition-colors group-hover:bg-relay-red group-hover:text-relay-white">
             LOVABLE
           </span>
         </Link>
