@@ -159,7 +159,7 @@ export function SiteHeader() {
                 <span className="font-display text-3xl font-bold text-relay-white">
                   {link.label}
                 </span>
-              </a>
+              </Link>
             ))}
             <Link
               to="/auth"
