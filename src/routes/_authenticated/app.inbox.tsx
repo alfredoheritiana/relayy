@@ -233,7 +233,7 @@ function InboxPage() {
         </p>
       ) : null}
 
-      <div className="relay-card rounded-2xl border border-border bg-surface p-4 sm:p-5">
+      <div className="relay-card rounded-2xl border border-border bg-surface p-3 sm:p-5">
         <div className="grid gap-4 sm:grid-cols-2">
           <div className="space-y-2">
             <Label htmlFor="search">Rechercher</Label>
@@ -267,7 +267,7 @@ function InboxPage() {
           </div>
         </div>
 
-        <div className="mt-4 flex flex-wrap gap-2 border-t border-border pt-4">
+        <div className="mt-4 grid grid-cols-2 gap-2 border-t border-border pt-4 sm:flex sm:flex-wrap">
           {statusFilters.map((value) => (
             <button
               key={value}
@@ -275,7 +275,7 @@ function InboxPage() {
               aria-pressed={status === value}
               onClick={() => setStatus(value)}
               className={cn(
-                "min-h-11 rounded-full border px-4 text-sm transition-colors",
+                "min-h-11 rounded-full border px-2 text-xs transition-colors sm:px-4 sm:text-sm",
                 status === value
                   ? "border-transparent bg-primary text-primary-foreground"
                   : "border-border text-muted-foreground hover:text-foreground",

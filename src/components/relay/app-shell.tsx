@@ -147,8 +147,8 @@ export function AppShell({
         ) : null}
       </div>
 
-      <main className="min-w-0 flex-1 px-4 py-6 sm:px-5 sm:py-8 lg:px-10">
-        <div className="mb-6 flex flex-wrap items-end justify-between gap-3 sm:mb-8">
+      <main className="min-w-0 flex-1 px-3 py-5 sm:px-5 sm:py-8 lg:px-10">
+        <div className="mb-5 flex flex-wrap items-end justify-between gap-3 sm:mb-8">
           <div className="min-w-0">
             {organizationName ? (
               <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">

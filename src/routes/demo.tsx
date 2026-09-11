@@ -65,11 +65,11 @@ function DemoHubPage() {
   return (
     <div className="min-h-screen bg-paper">
       <SiteHeader />
-      <main className="mx-auto max-w-[1440px] px-4 py-10 sm:px-5 sm:py-14 lg:px-10 lg:py-20">
+      <main className="mx-auto max-w-[1440px] px-4 py-8 sm:px-5 sm:py-14 lg:px-10 lg:py-20">
         <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
           {demoConfig.badge}
         </p>
-        <h1 className="mt-4 max-w-3xl text-3xl font-semibold leading-tight tracking-tight text-foreground sm:text-4xl lg:text-6xl">
+        <h1 className="mt-4 max-w-3xl text-[2rem] font-semibold leading-[1.08] tracking-tight text-foreground sm:text-4xl lg:text-6xl">
           Voyez Relay des deux côtés.
         </h1>
         <p className="mt-4 max-w-2xl text-lg text-muted-foreground">
@@ -88,7 +88,7 @@ function DemoHubPage() {
         <div
           role="tablist"
           aria-label="Point de vue"
-          className="mt-8 flex w-full max-w-full rounded-xl border border-border bg-surface p-1 sm:mt-10 sm:inline-flex sm:w-auto"
+          className="mt-6 grid w-full max-w-full grid-cols-2 rounded-xl border border-border bg-surface p-1 sm:mt-10 sm:inline-flex sm:w-auto"
         >
           {(
             [
@@ -102,7 +102,7 @@ function DemoHubPage() {
               aria-selected={side === value}
               onClick={() => setSide(value)}
               className={cn(
-                "min-h-11 flex-1 rounded-lg px-3 text-center text-xs transition-colors sm:flex-none sm:px-4 sm:text-sm",
+                "min-h-11 min-w-0 rounded-lg px-2 text-center text-xs transition-colors sm:flex-none sm:px-4 sm:text-sm",
                 side === value
                   ? "bg-ink text-background"
                   : "text-muted-foreground hover:text-foreground",

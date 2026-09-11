@@ -119,7 +119,7 @@ function LocalFallback({ demoHint }: { demoHint?: string | undefined }) {
   }, [done, text]);
 
   return (
-    <div className="space-y-5 rounded-2xl border border-border bg-surface p-6">
+    <div className="space-y-5 rounded-2xl border border-border bg-surface p-4 sm:p-6">
       <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
         Démonstration locale
       </p>
@@ -344,7 +344,7 @@ export function VisitorFlow({ slug, demoHint, onLeadCreated }: VisitorFlowProps)
   const understood = state.summary.length;
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 sm:space-y-8">
       <PhaseTrail state={state} />
 
       {understood > 0 && !showReview ? (
@@ -355,7 +355,11 @@ export function VisitorFlow({ slug, demoHint, onLeadCreated }: VisitorFlowProps)
 
       {showReview ? (
         <div className="space-y-6">
-          <h1 ref={headingRef} tabIndex={-1} className="text-3xl font-medium outline-none">
+          <h1
+            ref={headingRef}
+            tabIndex={-1}
+            className="text-2xl font-medium leading-snug outline-none sm:text-3xl"
+          >
             Voici ce qui sera transmis.
           </h1>
           {step?.kind === "max_questions_reached" && step.missingFields.length > 0 ? (
@@ -415,7 +419,7 @@ export function VisitorFlow({ slug, demoHint, onLeadCreated }: VisitorFlowProps)
             <h1
               ref={headingRef}
               tabIndex={-1}
-              className="text-3xl font-medium leading-snug outline-none sm:text-4xl"
+              className="text-2xl font-medium leading-snug outline-none sm:text-4xl"
             >
               {currentField.question}
             </h1>

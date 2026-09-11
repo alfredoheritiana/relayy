@@ -154,7 +154,7 @@ function Home() {
 
       <main>
         {/* HERO */}
-        <section className="relative overflow-hidden bg-relay-black pb-16 pt-8 text-relay-white sm:pb-24 sm:pt-12 lg:pb-36 lg:pt-20">
+        <section className="relative overflow-hidden bg-relay-black pb-12 pt-6 text-relay-white sm:pb-24 sm:pt-12 lg:pb-36 lg:pt-20">
           {/* Halo rouge, signature visuelle Relay */}
           <div
             aria-hidden="true"
@@ -182,17 +182,17 @@ function Home() {
                 extrait le service, le lieu, l’objectif et le délai, ne demande que ce qui manque,
                 et livre une demande qualifiée — pas un transcript à décoder.
               </p>
-              <div className="mt-8 flex flex-col gap-4 sm:mt-10 sm:flex-row sm:items-center sm:gap-5">
+              <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:items-center sm:gap-5">
                 <Link
                   to="/e/$slug"
                   params={{ slug: "geolia-demo" }}
-                  className="inline-flex min-h-12 items-center justify-center rounded-lg bg-relay-red px-7 font-display text-base font-semibold text-relay-white transition-colors hover:bg-relay-red-dark"
+                  className="inline-flex min-h-12 w-full items-center justify-center rounded-lg bg-relay-red px-5 font-display text-base font-semibold text-relay-white transition-colors hover:bg-relay-red-dark sm:w-auto sm:px-7"
                 >
                   Commencer le parcours visiteur →
                 </Link>
                 <a
                   href="#live-trace"
-                  className="inline-flex min-h-12 items-center justify-center font-display text-base font-semibold text-relay-white underline underline-offset-8 hover:text-relay-muted-dark"
+                  className="inline-flex min-h-12 w-full items-center justify-center font-display text-base font-semibold text-relay-white underline underline-offset-8 hover:text-relay-muted-dark sm:w-auto"
                 >
                   Voir Relay comprendre
                 </a>
@@ -330,12 +330,12 @@ function Home() {
                   orientation="vertical"
                   onSelect={setTraceStep}
                 />
-                <div className="mt-4 flex gap-3">
+                <div className="mt-4 grid grid-cols-2 gap-3">
                   <button
                     type="button"
                     onClick={() => setTraceStep((s) => Math.max(0, s - 1))}
                     disabled={traceStep === 0}
-                    className="min-h-11 rounded-lg border border-relay-white/40 px-4 font-display text-sm font-semibold disabled:opacity-50"
+                    className="min-h-11 rounded-lg border border-relay-white/40 px-3 font-display text-sm font-semibold disabled:opacity-50 sm:px-4"
                   >
                     Précédent
                   </button>
@@ -343,7 +343,7 @@ function Home() {
                     type="button"
                     onClick={() => setTraceStep((s) => Math.min(3, s + 1))}
                     disabled={traceStep === 3}
-                    className="min-h-11 rounded-lg bg-relay-white px-4 font-display text-sm font-semibold text-relay-black disabled:opacity-50"
+                    className="min-h-11 rounded-lg bg-relay-white px-3 font-display text-sm font-semibold text-relay-black disabled:opacity-50 sm:px-4"
                   >
                     Suivant
                   </button>

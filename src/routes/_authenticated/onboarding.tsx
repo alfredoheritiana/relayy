@@ -97,7 +97,7 @@ function OnboardingPage() {
         </div>
 
         <form
-          className="space-y-6 rounded-2xl border border-border bg-surface p-6 lg:col-span-8"
+          className="space-y-6 rounded-2xl border border-border bg-surface p-4 sm:p-6 lg:col-span-8"
           onSubmit={(event) => {
             event.preventDefault();
             next();
