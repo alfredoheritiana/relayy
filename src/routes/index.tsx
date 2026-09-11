@@ -3,6 +3,7 @@ import { useState } from "react";
 
 import { LiveRelayTrace } from "@/components/relay/live-trace";
 import { RelayTrace, relayTraceCaptions } from "@/components/relay/relay-trace";
+import { Button } from "@/components/ui/button";
 import { SiteFooter, SiteHeader } from "@/components/relay/site-header";
 import { demoConfig } from "@/config/product";
 import { cn } from "@/lib/utils";
@@ -156,14 +157,22 @@ function Home() {
         {/* HERO */}
         <section className="relative overflow-hidden bg-relay-black pb-14 pt-8 text-relay-white sm:pb-20 sm:pt-12 lg:min-h-[calc(100svh-74px)] lg:pb-16 lg:pt-16">
           {/* Halo rouge, signature visuelle Relay */}
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute -right-40 -top-40 size-[34rem] rounded-full bg-relay-red/35 blur-[120px] motion-safe:animate-fade-in"
-          />
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute -bottom-32 -left-24 size-[24rem] rounded-full bg-relay-blue/20 blur-[100px]"
-          />
+>>>>>>> REPLACE
+
+FILE: src/routes/index.tsx
+<<<<<<< SEARCH
+          <div className="relay-container relative grid items-start gap-10 lg:grid-cols-12 lg:gap-12 xl:gap-14">
+            <div className="relative lg:col-span-5 lg:pt-1">
+              <SectionLabel tone="dark">// RELAY · ADAPTIVE INTAKE</SectionLabel>
+              <h1 className="mt-5 max-w-[680px] font-display text-[clamp(3.35rem,6.15vw,7.25rem)] font-extrabold leading-[.9] tracking-[-.055em]">
+=======
+          <div className="relay-container relative grid items-start gap-10 py-2 lg:grid-cols-12 lg:gap-8 lg:py-0">
+            <div className="relative lg:col-span-4 lg:pt-1">
+              <SectionLabel tone="dark">// RELAY · ADAPTIVE INTAKE</SectionLabel>
+              <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.16em] text-relay-muted-dark">
+                // 01 · INTENT → ACTION
+              </p>
+              <h1 className="mt-5 max-w-[480px] font-display text-[clamp(3.6rem,5.25vw,5.9rem)] font-extrabold leading-[.91] tracking-[-.055em]">
           <div className="relay-container relative grid items-start gap-10 lg:grid-cols-12 lg:gap-12 xl:gap-14">
             <div className="relative lg:col-span-5 lg:pt-1">
               <SectionLabel tone="dark">// RELAY · ADAPTIVE INTAKE</SectionLabel>
@@ -179,27 +188,30 @@ function Home() {
                 uniquement la question qui manque et transmet une demande prête à traiter.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:mt-9 sm:flex-row sm:items-center sm:gap-4">
+                <Button
+                  type="button"
+                  className="min-h-12 w-full sm:w-auto"
+                  onClick={() => {
+                    window.dispatchEvent(new CustomEvent("relay:focus-input"));
+                  }}
+                >
+                  Tester avec votre phrase
+                </Button>
                 <Link
                   to="/e/$slug"
                   params={{ slug: "geolia-demo" }}
-                  className="inline-flex min-h-12 w-full items-center justify-center rounded-lg bg-relay-red px-5 font-display text-base font-semibold text-relay-white transition-colors hover:bg-relay-red-dark sm:w-auto sm:px-6"
-                >
-                  Essayer une demande
-                </Link>
-                <a
-                  href="#live-trace"
                   className="inline-flex min-h-12 w-full items-center justify-center font-display text-base font-semibold text-relay-white underline underline-offset-8 hover:text-relay-muted-dark sm:w-auto"
                 >
-                  Voir Relay comprendre
-                </a>
+                  Ouvrir le parcours complet ↗
+                </Link>
               </div>
               <p className="mt-6 font-mono text-[11px] uppercase tracking-[0.12em] text-relay-muted-dark">
                 4 faits compris · 0 question répétée · 1 prochaine action
               </p>
             </div>
 
-            <div className="lg:col-span-7">
-              <LiveRelayTrace tone="dark" className="rounded-[24px]" />
+            <div className="lg:col-span-8">
+              <LiveRelayTrace tone="dark" className="rounded-2xl" />
             </div>
           </div>
         </section>

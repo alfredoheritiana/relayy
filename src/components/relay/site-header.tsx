@@ -6,22 +6,33 @@ import { product } from "@/config/product";
 import { cn } from "@/lib/utils";
 
 const links = [
-  { to: "/", hash: "product", label: "Produit", index: "01" },
-  { to: "/demo", label: "Démonstration", index: "02" },
-  { to: "/", hash: "for-who", label: "Pour qui", index: "03" },
+  { to: "/", hash: "product", label: "Produit", description: "Le système", index: "01" },
+  { to: "/demo", label: "Démonstration", description: "Voir le flux", index: "02" },
+  { to: "/", hash: "for-who", label: "Pour qui", description: "Cas d’usage", index: "03" },
 ] as const;
 
 export function RelayWordmark({ tone = "light" }: { tone?: "light" | "dark" }) {
   return (
-    <span className="flex items-center gap-2">
-      <span className="block size-2.5 rounded-full bg-relay-red" aria-hidden="true" />
+    <span className="group flex items-center gap-2">
+      <span
+        className="block size-2.5 rounded-full bg-relay-red transition-transform duration-150 group-hover:translate-x-0.5"
+        aria-hidden="true"
+      />
       <span
         className={cn(
-          "font-display text-lg font-extrabold tracking-tight",
+          "font-display text-[22px] font-bold tracking-tight",
           tone === "dark" ? "text-relay-white" : "text-foreground",
         )}
       >
         {product.name}
+      </span>
+      <span
+        className={cn(
+          "hidden border-l border-relay-line-dark pl-3 font-mono text-[10px] uppercase tracking-[0.16em] sm:inline",
+          tone === "dark" ? "text-relay-muted-dark" : "text-muted-foreground",
+        )}
+      >
+        Adaptive intake
       </span>
     </span>
   );
@@ -86,23 +97,29 @@ export function SiteHeader() {
 
         <nav
           aria-label="Navigation principale"
-          className="hidden items-center justify-center gap-8 lg:col-span-6 lg:flex"
+          className="hidden items-stretch justify-center gap-1 lg:col-span-6 lg:flex"
         >
           {links.map((link) => (
             <Link
               key={link.label}
               to={link.to}
               {...("hash" in link ? { hash: link.hash } : {})}
-              className="group relative min-h-11 items-center pt-3 font-sans text-sm font-semibold text-relay-muted-dark transition-colors hover:text-relay-white"
+              className="group relative flex min-h-11 min-w-[116px] flex-col justify-center border-l border-relay-line-dark px-4 py-2 text-left text-relay-muted-dark transition-colors hover:text-relay-white"
             >
-              <span>{link.label}</span>
+              <span className="font-mono text-[10px] tracking-[0.16em] text-relay-muted-dark">
+                {link.index}
+              </span>
+              <span className="font-sans text-sm font-semibold">{link.label}</span>
+              <span className="text-[11px] transition-transform duration-150 group-hover:-translate-y-0.5 group-hover:text-relay-white">
+                {link.description}
+              </span>
               <span
                 aria-hidden="true"
-                className="absolute left-0 top-0 h-0.5 w-0 bg-relay-red transition-[width] duration-200 group-hover:w-5"
+                className="absolute inset-x-4 bottom-0 h-0.5 origin-left scale-x-0 bg-relay-red transition-transform duration-200 group-hover:scale-x-100 group-focus-visible:scale-x-100"
               />
             </Link>
           ))}
-          <div className="flex items-center justify-end gap-5 lg:col-span-3">
+          <div className="flex items-center justify-end gap-5 border-l border-relay-line-dark pl-5 lg:col-span-3">
             <Link
               to="/auth"
               search={{ next: "/app" }}
@@ -113,9 +130,9 @@ export function SiteHeader() {
             <Link
               to="/e/$slug"
               params={{ slug: "geolia-demo" }}
-              className="group inline-flex min-h-11 items-center gap-3 rounded-[10px] bg-relay-red px-5 font-display text-sm font-semibold text-relay-white transition-colors hover:bg-relay-red-dark active:scale-[.985]"
+              className="group inline-flex min-h-11 items-center gap-3 rounded-lg bg-relay-red px-5 font-display text-sm font-semibold text-relay-white transition-colors hover:bg-relay-red-dark active:scale-[.985]"
             >
-              Tester Relay
+              Tester Relay ↗
               <ArrowRight
                 className="size-4 transition-transform duration-200 group-hover:translate-x-0.5"
                 aria-hidden="true"
@@ -144,7 +161,7 @@ export function SiteHeader() {
       {open ? (
         <div
           id="menu-mobile"
-          className="fixed inset-x-0 bottom-0 top-[68px] z-50 overflow-y-auto bg-relay-black px-5 py-8 md:hidden"
+          className="fixed inset-x-0 bottom-0 top-16 z-50 overflow-y-auto bg-relay-black px-5 py-8 md:hidden"
         >
           <nav aria-label="Navigation mobile" className="flex flex-col">
             {links.map((link) => (
@@ -156,8 +173,13 @@ export function SiteHeader() {
                 className="flex min-h-14 items-baseline gap-4 border-b border-relay-line-dark py-3"
               >
                 <span className="relay-label text-relay-muted-dark">{link.index}</span>
-                <span className="font-display text-3xl font-bold text-relay-white">
-                  {link.label}
+                <span>
+                  <span className="font-display text-3xl font-bold text-relay-white">
+                    {link.label}
+                  </span>
+                  <span className="mt-1 block text-sm text-relay-muted-dark">
+                    {link.description}
+                  </span>
                 </span>
               </Link>
             ))}

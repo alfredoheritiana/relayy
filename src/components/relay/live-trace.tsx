@@ -74,9 +74,19 @@ export interface LiveRelayTraceProps {
  */
 export function LiveRelayTrace({ tone = "dark", className }: LiveRelayTraceProps) {
   const [text, setText] = useState<string>(demoConfig.referenceSentence);
-  const [analyzedText, setAnalyzedText] = useState<string | null>(null);
+  const [analyzedText, setAnalyzedText] = useState<string | null>(demoConfig.referenceSentence);
   const [analyzing, setAnalyzing] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  useEffect(() => {
+    const focusInput = () => {
+      textareaRef.current?.focus();
+      textareaRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+    };
+
+    window.addEventListener("relay:focus-input", focusInput);
+    return () => window.removeEventListener("relay:focus-input", focusInput);
+  }, []);
 
   useEffect(() => {
     if (!analyzing) return;
@@ -152,8 +162,9 @@ export function LiveRelayTrace({ tone = "dark", className }: LiveRelayTraceProps
             setAnalyzedText(null);
             setAnalyzing(false);
           }}
+          placeholder="Ex. Je voudrais faire borner mon terrain à Waterloo avant de poser une clôture…"
           className={cn(
-            "relay-voice min-h-48 resize-none rounded-lg text-[1.65rem] leading-[1.12] sm:min-h-56 sm:text-[2.15rem]",
+            "min-h-48 resize-none rounded-lg font-sans text-[1.15rem] font-medium leading-[1.48] sm:min-h-56 sm:text-[1.35rem]",
             dark
               ? "border-relay-line-dark bg-relay-black text-relay-white placeholder:text-relay-muted-dark"
               : "bg-surface",
@@ -183,7 +194,7 @@ export function LiveRelayTrace({ tone = "dark", className }: LiveRelayTraceProps
               type="button"
               onClick={() => {
                 setText(demoConfig.referenceSentence);
-                setAnalyzedText(null);
+                setAnalyzedText(demoConfig.referenceSentence);
               }}
               className={cn(
                 "min-h-11 text-sm underline underline-offset-4",
@@ -208,7 +219,7 @@ export function LiveRelayTrace({ tone = "dark", className }: LiveRelayTraceProps
 
       {analyzed ? (
         <div className="flex flex-col gap-5">
-          <p className="relay-voice text-lg leading-relaxed sm:text-xl">
+          <p className="font-sans text-lg font-medium leading-relaxed sm:text-xl">
             {parts.map((part, index) =>
               part.key ? (
                 <mark
