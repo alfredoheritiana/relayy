@@ -1,5 +1,5 @@
 import { QueryClient } from "@tanstack/react-query";
-import { Link, createRootRouteWithContext, useRouter, Outlet, HeadContent, Scripts } from "@tanstack/react-router";
+import { Link, type ErrorComponentProps, createRootRouteWithContext, useRouter, Outlet, HeadContent, Scripts } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 
 
@@ -29,7 +29,7 @@ function NotFoundComponent() {
   );
 }
 
-function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
+function ErrorComponent({ error, reset }: ErrorComponentProps) {
   console.error(error);
   const router = useRouter();
   useEffect(() => {
