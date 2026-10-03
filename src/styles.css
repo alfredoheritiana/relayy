@@ -2,299 +2,132 @@
 @source "../src";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
-
-/*
- * Relay — système de design.
- * Toutes les couleurs sont des tokens sémantiques en oklch.
- * Aucune couleur brute ne doit être écrite dans un composant.
- */
-
-@theme inline {
-  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Bricolage Grotesque", "Manrope", ui-sans-serif, sans-serif;
-  --font-serif: "Instrument Serif", ui-serif, Georgia, serif;
-  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
-
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --radius-2xl: calc(var(--radius) + 8px);
-  --radius-3xl: calc(var(--radius) + 12px);
-
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-
-  --color-ink: var(--ink);
-  --color-paper: var(--paper);
-  --color-surface: var(--surface);
-  --color-signal: var(--signal);
-  --color-signal-foreground: var(--signal-foreground);
-  --color-aqua: var(--aqua);
-  --color-success: var(--success);
-  --color-success-foreground: var(--success-foreground);
-  --color-warning: var(--warning);
-  --color-warning-foreground: var(--warning-foreground);
-
-  --color-relay-black: var(--relay-black);
-  --color-relay-ink: var(--relay-ink);
-  --color-relay-white: var(--relay-white);
-  --color-relay-red: var(--relay-red);
-  --color-relay-red-dark: var(--relay-red-dark);
-  --color-relay-blue: var(--relay-blue);
-  --color-relay-lime: var(--relay-lime);
-  --color-relay-orange: var(--relay-orange);
-  --color-relay-muted-dark: var(--relay-muted-dark);
-  --color-relay-line: var(--relay-line);
-  --color-relay-line-dark: var(--relay-line-dark);
-}
-
-:root {
-  --radius: 0.5rem;
-
-  /* Relay Editorial Intelligence — palette propriétaire */
-  --relay-black: #080808;
-  --relay-ink: #141414;
-  --relay-paper: #f6f2e9;
-  --relay-white: #fffdf8;
-  --relay-red: #e53245;
-  --relay-red-dark: #b9172a;
-  --relay-blue: #3d78ff;
-  --relay-lime: #b7e34b;
-  --relay-orange: #f06b32;
-  --relay-muted: #78746d;
-  --relay-muted-dark: #aaa69e;
-  --relay-line: #d7d1c7;
-  --relay-line-dark: #303030;
-
-  --ink: var(--relay-black);
-  --paper: var(--relay-paper);
-  --surface: var(--relay-white);
-  --signal: var(--relay-lime);
-  --signal-foreground: var(--relay-black);
-  --aqua: var(--relay-blue);
-
-  --background: #ffffff;
-  --foreground: var(--relay-black);
-  --card: var(--relay-white);
-  --card-foreground: var(--relay-black);
-  --popover: var(--relay-white);
-  --popover-foreground: var(--relay-black);
-  --primary: var(--relay-red);
-  --primary-foreground: var(--relay-white);
-  --secondary: var(--relay-ink);
-  --secondary-foreground: var(--relay-white);
-  --muted: #efe9dd;
-  --muted-foreground: var(--relay-muted);
-  --accent: var(--relay-blue);
-  --accent-foreground: var(--relay-white);
-  --destructive: #c92b3b;
-  --destructive-foreground: var(--relay-white);
-  --warning: #b86413;
-  --warning-foreground: var(--relay-white);
-  --success: #237a55;
-  --success-foreground: var(--relay-white);
-  --border: var(--relay-line);
-  --input: var(--relay-line);
-  --ring: var(--relay-red);
-}
-
 @layer base {
-  * {
-    border-color: var(--color-border);
+  :root {
+    --ink: #050038;
+    --dark-blue: #1c2448;
+    --white: #ffffff;
+    --cream: #f5f1e8;
+    --orange: #ffa11d;
+    --yellow: #ffc400;
+    --turquoise: #26c1c1;
+    --light-blue: #dbf7f4;
+    --blue-accent: #1f9ebb;
+    --deep-red: #944131;
+    --khaki: #5f6549;
+    --vert: #456917;
+
+    --font-heading: 'Dahlia', 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+    --font-body: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-handwritten: 'Reenie Beanie', cursive;
   }
 
   html {
-    -webkit-text-size-adjust: 100%;
+    font-size: 1rem;
+    color: var(--dark-blue);
+    font-family: var(--font-body);
+    scroll-behavior: smooth;
+  }
+
+  @media screen and (max-width: 1920px) {
+    html {
+      font-size: calc(-0.25rem + 1.041666vw);
+    }
+  }
+
+  @media screen and (max-width: 1440px) {
+    html {
+      font-size: calc(0.5491rem + 0.2232vw);
+    }
+  }
+
+  @media screen and (max-width: 992px) {
+    html {
+      font-size: calc(0.7497rem + 0.4036vw);
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    html {
+      font-size: 1rem;
+    }
   }
 
   body {
-    background-color: var(--color-background);
-    color: var(--color-foreground);
-    font-family: var(--font-sans);
+    background-color: var(--white);
+    color: var(--dark-blue);
+    font-family: var(--font-body);
     font-size: 1rem;
-    line-height: 1.55;
-    text-rendering: optimizeLegibility;
+    font-weight: 300;
+    line-height: 1.375;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
   }
 
-  h1,
-  h2,
-  h3 {
-    text-wrap: balance;
-    letter-spacing: -0.02em;
-    line-height: 1.1;
-  }
-
-  :focus-visible {
-    outline: 3px solid var(--color-ring);
-    outline-offset: 2px;
-    border-radius: 4px;
+  h1, h2, h3, h4 {
+    font-family: var(--font-heading);
+    font-weight: 400;
   }
 }
 
-@utility display-xl {
-  font-size: clamp(2.25rem, 1.4rem + 3.6vw, 4rem);
-  font-weight: 600;
+/* Typography Utility Classes */
+.font-display {
+  font-family: var(--font-heading);
 }
 
-@utility display-lg {
-  font-size: clamp(1.75rem, 1.2rem + 2.2vw, 2.75rem);
-  font-weight: 600;
+.font-handwriting {
+  font-family: var(--font-handwritten);
 }
 
-@utility display-md {
-  font-size: clamp(1.35rem, 1.1rem + 1vw, 1.85rem);
-  font-weight: 600;
+.font-body {
+  font-family: var(--font-body);
 }
 
-@utility eyebrow {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--color-muted-foreground);
+/* Page reveal animation */
+.page-wrapper {
+  animation: pageFadeIn 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
-@utility data-value {
-  font-family: var(--font-mono);
-  font-variant-numeric: tabular-nums;
-}
-
-@utility touch-target {
-  min-height: 44px;
-  min-width: 44px;
-}
-
-@keyframes relay-rise {
+@keyframes pageFadeIn {
   from {
     opacity: 0;
-    transform: translateY(10px);
   }
   to {
     opacity: 1;
-    transform: none;
   }
 }
 
-@utility relay-rise {
-  animation: relay-rise 280ms cubic-bezier(0.22, 0.8, 0.3, 1) both;
+/* Button arrow shift on hover */
+.mj-btn .mj-btn-arrow {
+  transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.mj-btn:hover .mj-btn-arrow {
+  transform: translateX(4px);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
-    scroll-behavior: auto !important;
-  }
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--cream);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--orange);
+  border-radius: 3px;
 }
 
-/* --- Relay Editorial Intelligence : typographie et surfaces --- */
-
-@utility relay-display {
-  font-family: var(--font-display);
-  font-weight: 800;
-  letter-spacing: -0.035em;
-  line-height: 0.9;
-  text-wrap: balance;
+/* Hide scrollbar utility */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
-@utility relay-h1 {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(3rem, 8vw, 8.75rem);
-  line-height: 0.9;
-  letter-spacing: -0.04em;
-}
-
-@utility relay-h2 {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(2.25rem, 5.2vw, 5.5rem);
-  line-height: 0.95;
-  letter-spacing: -0.035em;
-}
-
-@utility relay-h3 {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(1.5rem, 2.6vw, 2.75rem);
-  line-height: 1.05;
-  letter-spacing: -0.02em;
-}
-
-@utility relay-voice {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-weight: 400;
-  letter-spacing: -0.01em;
-}
-
-@utility relay-label {
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-}
-
-@utility relay-container {
-  margin-inline: auto;
-  max-width: 1480px;
-  padding-inline: 1.125rem;
-}
-
-@media (min-width: 768px) {
-  .relay-container {
-    padding-inline: 2rem;
-  }
-}
-
-@media (min-width: 1280px) {
-  .relay-container {
-    padding-inline: 3.5rem;
-  }
-}
-
-@keyframes relay-marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-@utility relay-marquee {
-  animation: relay-marquee 26s linear infinite;
-}
-
-/* Kinetic UI — surfaces nettes : bordure 1px et ombre dure, jamais de flou. */
-@utility relay-card {
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.05);
-}
-
-/* Masque le badge « Edit with Lovable » injecté sur le site publié. */
 #lovable-badge,
 #lovable-badge-cta,
 #lovable-badge-text,

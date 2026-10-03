@@ -1,5 +1,5 @@
 import { QueryClient } from "@tanstack/react-query";
-import { Link, createRootRouteWithContext, useRouter, HeadContent, Scripts } from "@tanstack/react-router";
+import { Link, createRootRouteWithContext, useRouter, Outlet, HeadContent, Scripts } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 
 
@@ -72,21 +72,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Relay — intake adaptatif" },
-      {
-        name: "description",
-        content:
-          "Relay transforme une phrase en demande structurée pour les entreprises de services.",
-      },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Relay — intake adaptatif" },
-      {
-        property: "og:description",
-        content: "Une question utile à la fois, une demande exploitable à l’arrivée.",
-      },
-      { property: "og:type", content: "website" },
+      { title: "MJ Holidays: Dream holidays in Mauritius" },
+      { name: "description", content: "Luxury private pool villas and resort lifestyle in Mauritius." },
+            { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {
@@ -98,7 +87,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Reenie+Beanie&display=swap",
       },
     ],
   }),
@@ -110,7 +99,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="fr">
+    <html lang="en">
       <head>
         <HeadContent />
       </head>
@@ -123,5 +112,5 @@ function RootShell({ children }: { children: ReactNode }) {
 }
 
 function RootComponent() {
-  return null;
+  return <Outlet />;
 }
