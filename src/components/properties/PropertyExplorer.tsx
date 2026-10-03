@@ -6,7 +6,7 @@ interface PropertyExplorerProps {
 }
 
 export const PropertyExplorer: React.FC<PropertyExplorerProps> = () => {
-  const [activeResortId, setActiveResortId] = useState<string>(PROPERTIES[0].id);
+  const [activeResortId, setActiveResortId] = useState<string>(PROPERTIES[0]?.id ?? "");
   const cardRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
 
   useEffect(() => {

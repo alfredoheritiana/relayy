@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FAQ_DATA, REVIEWS_SUMMARY, REVIEWS_LIST } from '../../data';
 
 export const FAQSection: React.FC = () => {
-  const [openFaqId, setOpenFaqId] = useState<string | null>(FAQ_DATA[0].id);
+  const [openFaqId, setOpenFaqId] = useState<string | null>(FAQ_DATA[0]?.id ?? null);
   const [activePlatform, setActivePlatform] = useState<string>('All Reviews');
   const [reviewIdx, setReviewIdx] = useState<number>(0);
 
@@ -18,7 +18,7 @@ export const FAQSection: React.FC = () => {
     setReviewIdx((prev) => (prev - 1 + REVIEWS_LIST.length) % REVIEWS_LIST.length);
   };
 
-  const currentReview = REVIEWS_LIST[reviewIdx];
+  const currentReview = REVIEWS_LIST[reviewIdx]!;
 
   return (
     <section id="faq" className="w-full py-16 md:py-24 bg-white">
