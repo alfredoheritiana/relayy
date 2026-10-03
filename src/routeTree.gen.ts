@@ -10,238 +10,33 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
-import { Route as AuthRouteImport } from './routes/auth'
-import { Route as DemoRouteImport } from './routes/demo'
-import { Route as AuthenticatedOnboardingRouteImport } from './routes/_authenticated/onboarding'
-import { Route as AppIndexRouteImport } from './routes/app.index'
-import { Route as ESlugRouteImport } from './routes/e.$slug'
-import { Route as LegalConditionsRouteImport } from './routes/legal.conditions'
-import { Route as LegalConfidentialiteRouteImport } from './routes/legal.confidentialite'
-import { Route as AuthenticatedAppAnalyticsRouteImport } from './routes/_authenticated/app.analytics'
-import { Route as AuthenticatedAppInboxRouteImport } from './routes/_authenticated/app.inbox'
-import { Route as AuthenticatedAppKnowledgeRouteImport } from './routes/_authenticated/app.knowledge'
-import { Route as AuthenticatedAppSettingsRouteImport } from './routes/_authenticated/app.settings'
-import { Route as AuthenticatedAppExperiencesIndexRouteImport } from './routes/_authenticated/app.experiences.index'
-import { Route as AuthenticatedAppExperiencesExperienceIdRouteImport } from './routes/_authenticated/app.experiences.$experienceId'
-import { Route as AuthenticatedAppExperiencesNewRouteImport } from './routes/_authenticated/app.experiences.new'
-import { Route as AuthenticatedAppLeadsLeadIdRouteImport } from './routes/_authenticated/app.leads.$leadId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
-  id: '/_authenticated',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuthRoute = AuthRouteImport.update({
-  id: '/auth',
-  path: '/auth',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DemoRoute = DemoRouteImport.update({
-  id: '/demo',
-  path: '/demo',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuthenticatedOnboardingRoute = AuthenticatedOnboardingRouteImport.update({
-  id: '/onboarding',
-  path: '/onboarding',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AppIndexRoute = AppIndexRouteImport.update({
-  id: '/app/',
-  path: '/app/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ESlugRoute = ESlugRouteImport.update({
-  id: '/e/$slug',
-  path: '/e/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LegalConditionsRoute = LegalConditionsRouteImport.update({
-  id: '/legal/conditions',
-  path: '/legal/conditions',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LegalConfidentialiteRoute = LegalConfidentialiteRouteImport.update({
-  id: '/legal/confidentialite',
-  path: '/legal/confidentialite',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuthenticatedAppAnalyticsRoute =
-  AuthenticatedAppAnalyticsRouteImport.update({
-    id: '/app/analytics',
-    path: '/app/analytics',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedAppInboxRoute = AuthenticatedAppInboxRouteImport.update({
-  id: '/app/inbox',
-  path: '/app/inbox',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedAppKnowledgeRoute =
-  AuthenticatedAppKnowledgeRouteImport.update({
-    id: '/app/knowledge',
-    path: '/app/knowledge',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedAppSettingsRoute =
-  AuthenticatedAppSettingsRouteImport.update({
-    id: '/app/settings',
-    path: '/app/settings',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedAppExperiencesIndexRoute =
-  AuthenticatedAppExperiencesIndexRouteImport.update({
-    id: '/app/experiences/',
-    path: '/app/experiences/',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedAppExperiencesExperienceIdRoute =
-  AuthenticatedAppExperiencesExperienceIdRouteImport.update({
-    id: '/app/experiences/$experienceId',
-    path: '/app/experiences/$experienceId',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedAppExperiencesNewRoute =
-  AuthenticatedAppExperiencesNewRouteImport.update({
-    id: '/app/experiences/new',
-    path: '/app/experiences/new',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedAppLeadsLeadIdRoute =
-  AuthenticatedAppLeadsLeadIdRouteImport.update({
-    id: '/app/leads/$leadId',
-    path: '/app/leads/$leadId',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/auth': typeof AuthRoute
-  '/demo': typeof DemoRoute
-  '/onboarding': typeof AuthenticatedOnboardingRoute
-  '/e/$slug': typeof ESlugRoute
-  '/legal/conditions': typeof LegalConditionsRoute
-  '/legal/confidentialite': typeof LegalConfidentialiteRoute
-  '/app/': typeof AppIndexRoute
-  '/app/analytics': typeof AuthenticatedAppAnalyticsRoute
-  '/app/inbox': typeof AuthenticatedAppInboxRoute
-  '/app/knowledge': typeof AuthenticatedAppKnowledgeRoute
-  '/app/settings': typeof AuthenticatedAppSettingsRoute
-  '/app/experiences/$experienceId': typeof AuthenticatedAppExperiencesExperienceIdRoute
-  '/app/experiences/new': typeof AuthenticatedAppExperiencesNewRoute
-  '/app/leads/$leadId': typeof AuthenticatedAppLeadsLeadIdRoute
-  '/app/experiences/': typeof AuthenticatedAppExperiencesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/auth': typeof AuthRoute
-  '/demo': typeof DemoRoute
-  '/onboarding': typeof AuthenticatedOnboardingRoute
-  '/e/$slug': typeof ESlugRoute
-  '/legal/conditions': typeof LegalConditionsRoute
-  '/legal/confidentialite': typeof LegalConfidentialiteRoute
-  '/app': typeof AppIndexRoute
-  '/app/analytics': typeof AuthenticatedAppAnalyticsRoute
-  '/app/inbox': typeof AuthenticatedAppInboxRoute
-  '/app/knowledge': typeof AuthenticatedAppKnowledgeRoute
-  '/app/settings': typeof AuthenticatedAppSettingsRoute
-  '/app/experiences/$experienceId': typeof AuthenticatedAppExperiencesExperienceIdRoute
-  '/app/experiences/new': typeof AuthenticatedAppExperiencesNewRoute
-  '/app/leads/$leadId': typeof AuthenticatedAppLeadsLeadIdRoute
-  '/app/experiences': typeof AuthenticatedAppExperiencesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
-  '/auth': typeof AuthRoute
-  '/demo': typeof DemoRoute
-  '/_authenticated/onboarding': typeof AuthenticatedOnboardingRoute
-  '/e/$slug': typeof ESlugRoute
-  '/legal/conditions': typeof LegalConditionsRoute
-  '/legal/confidentialite': typeof LegalConfidentialiteRoute
-  '/app/': typeof AppIndexRoute
-  '/_authenticated/app/analytics': typeof AuthenticatedAppAnalyticsRoute
-  '/_authenticated/app/inbox': typeof AuthenticatedAppInboxRoute
-  '/_authenticated/app/knowledge': typeof AuthenticatedAppKnowledgeRoute
-  '/_authenticated/app/settings': typeof AuthenticatedAppSettingsRoute
-  '/_authenticated/app/experiences/$experienceId': typeof AuthenticatedAppExperiencesExperienceIdRoute
-  '/_authenticated/app/experiences/new': typeof AuthenticatedAppExperiencesNewRoute
-  '/_authenticated/app/leads/$leadId': typeof AuthenticatedAppLeadsLeadIdRoute
-  '/_authenticated/app/experiences/': typeof AuthenticatedAppExperiencesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/'
-    | '/auth'
-    | '/demo'
-    | '/onboarding'
-    | '/e/$slug'
-    | '/legal/conditions'
-    | '/legal/confidentialite'
-    | '/app/'
-    | '/app/analytics'
-    | '/app/inbox'
-    | '/app/knowledge'
-    | '/app/settings'
-    | '/app/experiences/$experienceId'
-    | '/app/experiences/new'
-    | '/app/leads/$leadId'
-    | '/app/experiences/'
+  fullPaths: '/'
   fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/'
-    | '/auth'
-    | '/demo'
-    | '/onboarding'
-    | '/e/$slug'
-    | '/legal/conditions'
-    | '/legal/confidentialite'
-    | '/app'
-    | '/app/analytics'
-    | '/app/inbox'
-    | '/app/knowledge'
-    | '/app/settings'
-    | '/app/experiences/$experienceId'
-    | '/app/experiences/new'
-    | '/app/leads/$leadId'
-    | '/app/experiences'
-  id:
-    | '__root__'
-    | '/'
-    | '/_authenticated'
-    | '/auth'
-    | '/demo'
-    | '/_authenticated/onboarding'
-    | '/e/$slug'
-    | '/legal/conditions'
-    | '/legal/confidentialite'
-    | '/app/'
-    | '/_authenticated/app/analytics'
-    | '/_authenticated/app/inbox'
-    | '/_authenticated/app/knowledge'
-    | '/_authenticated/app/settings'
-    | '/_authenticated/app/experiences/$experienceId'
-    | '/_authenticated/app/experiences/new'
-    | '/_authenticated/app/leads/$leadId'
-    | '/_authenticated/app/experiences/'
+  to: '/'
+  id: '__root__' | '/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
-  AuthRoute: typeof AuthRoute
-  DemoRoute: typeof DemoRoute
-  ESlugRoute: typeof ESlugRoute
-  LegalConditionsRoute: typeof LegalConditionsRoute
-  LegalConfidentialiteRoute: typeof LegalConfidentialiteRoute
-  AppIndexRoute: typeof AppIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -253,158 +48,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_authenticated': {
-      id: '/_authenticated'
-      path: ''
-      fullPath: '/'
-      preLoaderRoute: typeof AuthenticatedRouteRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/auth': {
-      id: '/auth'
-      path: '/auth'
-      fullPath: '/auth'
-      preLoaderRoute: typeof AuthRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/demo': {
-      id: '/demo'
-      path: '/demo'
-      fullPath: '/demo'
-      preLoaderRoute: typeof DemoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/onboarding': {
-      id: '/_authenticated/onboarding'
-      path: '/onboarding'
-      fullPath: '/onboarding'
-      preLoaderRoute: typeof AuthenticatedOnboardingRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/app/': {
-      id: '/app/'
-      path: '/app'
-      fullPath: '/app/'
-      preLoaderRoute: typeof AppIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/e/$slug': {
-      id: '/e/$slug'
-      path: '/e/$slug'
-      fullPath: '/e/$slug'
-      preLoaderRoute: typeof ESlugRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/legal/conditions': {
-      id: '/legal/conditions'
-      path: '/legal/conditions'
-      fullPath: '/legal/conditions'
-      preLoaderRoute: typeof LegalConditionsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/legal/confidentialite': {
-      id: '/legal/confidentialite'
-      path: '/legal/confidentialite'
-      fullPath: '/legal/confidentialite'
-      preLoaderRoute: typeof LegalConfidentialiteRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/app/analytics': {
-      id: '/_authenticated/app/analytics'
-      path: '/app/analytics'
-      fullPath: '/app/analytics'
-      preLoaderRoute: typeof AuthenticatedAppAnalyticsRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/app/inbox': {
-      id: '/_authenticated/app/inbox'
-      path: '/app/inbox'
-      fullPath: '/app/inbox'
-      preLoaderRoute: typeof AuthenticatedAppInboxRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/app/knowledge': {
-      id: '/_authenticated/app/knowledge'
-      path: '/app/knowledge'
-      fullPath: '/app/knowledge'
-      preLoaderRoute: typeof AuthenticatedAppKnowledgeRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/app/settings': {
-      id: '/_authenticated/app/settings'
-      path: '/app/settings'
-      fullPath: '/app/settings'
-      preLoaderRoute: typeof AuthenticatedAppSettingsRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/app/experiences/': {
-      id: '/_authenticated/app/experiences/'
-      path: '/app/experiences'
-      fullPath: '/app/experiences/'
-      preLoaderRoute: typeof AuthenticatedAppExperiencesIndexRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/app/experiences/$experienceId': {
-      id: '/_authenticated/app/experiences/$experienceId'
-      path: '/app/experiences/$experienceId'
-      fullPath: '/app/experiences/$experienceId'
-      preLoaderRoute: typeof AuthenticatedAppExperiencesExperienceIdRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/app/experiences/new': {
-      id: '/_authenticated/app/experiences/new'
-      path: '/app/experiences/new'
-      fullPath: '/app/experiences/new'
-      preLoaderRoute: typeof AuthenticatedAppExperiencesNewRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/app/leads/$leadId': {
-      id: '/_authenticated/app/leads/$leadId'
-      path: '/app/leads/$leadId'
-      fullPath: '/app/leads/$leadId'
-      preLoaderRoute: typeof AuthenticatedAppLeadsLeadIdRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
   }
 }
 
-interface AuthenticatedRouteRouteChildren {
-  AuthenticatedOnboardingRoute: typeof AuthenticatedOnboardingRoute
-  AuthenticatedAppAnalyticsRoute: typeof AuthenticatedAppAnalyticsRoute
-  AuthenticatedAppInboxRoute: typeof AuthenticatedAppInboxRoute
-  AuthenticatedAppKnowledgeRoute: typeof AuthenticatedAppKnowledgeRoute
-  AuthenticatedAppSettingsRoute: typeof AuthenticatedAppSettingsRoute
-  AuthenticatedAppExperiencesExperienceIdRoute: typeof AuthenticatedAppExperiencesExperienceIdRoute
-  AuthenticatedAppExperiencesNewRoute: typeof AuthenticatedAppExperiencesNewRoute
-  AuthenticatedAppLeadsLeadIdRoute: typeof AuthenticatedAppLeadsLeadIdRoute
-  AuthenticatedAppExperiencesIndexRoute: typeof AuthenticatedAppExperiencesIndexRoute
-}
-
-const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
-  AuthenticatedOnboardingRoute: AuthenticatedOnboardingRoute,
-  AuthenticatedAppAnalyticsRoute: AuthenticatedAppAnalyticsRoute,
-  AuthenticatedAppInboxRoute: AuthenticatedAppInboxRoute,
-  AuthenticatedAppKnowledgeRoute: AuthenticatedAppKnowledgeRoute,
-  AuthenticatedAppSettingsRoute: AuthenticatedAppSettingsRoute,
-  AuthenticatedAppExperiencesExperienceIdRoute:
-    AuthenticatedAppExperiencesExperienceIdRoute,
-  AuthenticatedAppExperiencesNewRoute: AuthenticatedAppExperiencesNewRoute,
-  AuthenticatedAppLeadsLeadIdRoute: AuthenticatedAppLeadsLeadIdRoute,
-  AuthenticatedAppExperiencesIndexRoute: AuthenticatedAppExperiencesIndexRoute,
-}
-
-const AuthenticatedRouteRouteWithChildren =
-  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
-  AuthRoute: AuthRoute,
-  DemoRoute: DemoRoute,
-  ESlugRoute: ESlugRoute,
-  LegalConditionsRoute: LegalConditionsRoute,
-  LegalConfidentialiteRoute: LegalConfidentialiteRoute,
-  AppIndexRoute: AppIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
