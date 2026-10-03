@@ -92,7 +92,7 @@
   --signal-foreground: var(--relay-black);
   --aqua: var(--relay-blue);
 
-  --background: var(--relay-paper);
+  --background: #ffffff;
   --foreground: var(--relay-black);
   --card: var(--relay-white);
   --card-foreground: var(--relay-black);
